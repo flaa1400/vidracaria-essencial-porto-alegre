@@ -1,4 +1,4 @@
----
+﻿---
 title: "Cortina de Vidro em Porto Alegre"
 description: "Instalação de cortina de vidro em Porto Alegre. Sistema retrátil para sacadas e varandas com vedação total e visão panorâmica."
 image: "https://images.unsplash.com/photo-1590059305141-8f5223e74730?q=80&w=2000&auto=format&fit=crop"
@@ -6,7 +6,7 @@ image: "https://images.unsplash.com/photo-1590059305141-8f5223e74730?q=80&w=2000
 
 # Cortina de Vidro em Porto Alegre: Visão Panorâmica e Elegância
 
-A cortina de vidro é o sistema mais sofisticado para quem deseja integrar ambientes e aproveitar a vista de Porto Alegre. Com a **Vidra�aria Essencial**, sua sacada ganha um novo nível de aproveitamento, protegida do barulho e da chuva.
+A cortina de vidro é o sistema mais sofisticado para quem deseja integrar ambientes e aproveitar a vista de Porto Alegre. Com a **Vidraçaria Essencial**, sua sacada ganha um novo nível de aproveitamento, protegida do barulho e da chuva.
 
 
 ## Design Minimalista
@@ -31,3 +31,5 @@ Diferente dos fechamentos tradicionais, a cortina de vidro não possui perfis ve
 
 
 Solicite uma visita técnica para medição e consultoria sobre o melhor sistema para o seu prédio.
+
+

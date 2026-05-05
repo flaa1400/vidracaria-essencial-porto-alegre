@@ -1,4 +1,4 @@
----
+﻿---
 title: "Manutenção em Esquadrias de Alumínio em Porto Alegre"
 description: "Reparo e regulagem de janelas e portas de alumínio em Porto Alegre. Troca de fechos, braços, borrachas e vedação contra infiltrações."
 image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=2070&auto=format&fit=crop"
@@ -34,3 +34,5 @@ Um serviço de manutenção bem executado evita a necessidade de trocar toda a e
 
 
 Atendemos rápido para residências e escritórios no Centro Histórico, Praia de Belas e arredores.
+
+

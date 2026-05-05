@@ -1,7 +1,10 @@
 {
   "name": "vidracaria-porto-alegre",
-  "type": "module",
   "version": "1.0.0",
+  "engines": {
+    "node": "20.x"
+  },
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

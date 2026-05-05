@@ -1,4 +1,4 @@
----
+﻿---
 title: "Muro de Vidro em Porto Alegre"
 description: "Construção de muro de vidro temperado e laminado em Porto Alegre. Segurança perimetral com visibilidade e valorização da fachada."
 image: "https://images.unsplash.com/photo-1590059305141-8f5223e74730?q=80&w=2000&auto=format&fit=crop"
@@ -6,7 +6,7 @@ image: "https://images.unsplash.com/photo-1590059305141-8f5223e74730?q=80&w=2000
 
 # Muro de Vidro em Porto Alegre: Segurança e Beleza na Fachada
 
-Substituir muros de alvenaria por muros de vidro é a tendência que mais cresce em Porto Alegre. A **Vidra�aria Essencial** projeta fachadas que oferecem segurança perimetral sem esconder a beleza da sua residência ou empresa.
+Substituir muros de alvenaria por muros de vidro é a tendência que mais cresce em Porto Alegre. A **Vidraçaria Essencial** projeta fachadas que oferecem segurança perimetral sem esconder a beleza da sua residência ou empresa.
 
 
 ## Segurança e Resistência
@@ -31,3 +31,5 @@ A transparência do vidro também contribui para a segurança, pois permite a vi
 
 
 Atendimento especializado em bairros residenciais como Ipanema, Vila Assunção e Higienópolis.
+
+

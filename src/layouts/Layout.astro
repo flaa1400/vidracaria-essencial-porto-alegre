@@ -40,7 +40,7 @@ const { title, description } = Astro.props;
 					<a href="/servicos" class="hover:text-secondary hover:scale-105 transition-all text-sm uppercase tracking-widest">Serviços</a>
 					<a href="/sobre" class="hover:text-secondary hover:scale-105 transition-all text-sm uppercase tracking-widest">Sobre</a>
 					<a href="/contato" class="hover:text-secondary hover:scale-105 transition-all text-sm uppercase tracking-widest">Contato</a>
-					<a href="/contato" class="bg-secondary text-white px-8 py-4 text-xs font-black uppercase tracking-widest hover:bg-accent hover:scale-105 active:scale-95 transition-all shadow-lg shadow-secondary/20">Orçamento</a>
+					<a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(SITE_CONFIG.contact.message)}`} target="_blank" rel="noopener noreferrer" class="bg-secondary text-white px-8 py-4 text-xs font-black uppercase tracking-widest hover:bg-accent hover:scale-105 active:scale-95 transition-all shadow-lg shadow-secondary/20">Orçamento</a>
 				</nav>
 
 				<!-- Mobile Toggle -->

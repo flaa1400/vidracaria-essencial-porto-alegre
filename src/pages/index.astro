@@ -1,0 +1,153 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { SITE_CONFIG } from '../data/config';
+
+const services = (await getCollection('servicos')).slice(0, 6);
+---
+
+<Layout title={`Vidraçaria em Porto Alegre | ${SITE_CONFIG.name}`}>
+	<!-- Hero Section -->
+	<section class="py-24 md:py-32 bg-white overflow-hidden">
+		<div class="container mx-auto px-6 md:px-12">
+			<div class="max-w-4xl">
+				<span class="inline-block bg-primary text-secondary font-black px-4 py-1 uppercase tracking-[0.2em] text-[10px] mb-8">
+					{SITE_CONFIG.tagline}
+				</span>
+				<h1 class="text-5xl md:text-7xl font-black leading-[1.1] mb-10 tracking-tighter text-gray-900 uppercase">
+					Sua <span class="text-secondary underline decoration-primary decoration-[12px] underline-offset-[12px]">Vidraçaria em Porto Alegre</span> com acabamento de elite.
+				</h1>
+				<p class="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mb-12">
+					A {SITE_CONFIG.name} é a melhor opção de vidraçaria em Porto Alegre para quem busca box de banheiro, espelhos e fechamento de sacadas premium. Projetos exclusivos com precisão técnica milimétrica.
+				</p>
+				<div class="flex flex-col sm:flex-row gap-6">
+					<a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(SITE_CONFIG.contact.message)}`} class="bg-secondary text-white font-black px-12 py-7 text-center hover:bg-accent hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-secondary/30 uppercase tracking-widest text-xs">
+						Orçamento no WhatsApp
+					</a>
+					<a href="/servicos" class="bg-gray-100 text-gray-900 font-black px-12 py-7 text-center hover:bg-gray-200 hover:scale-105 active:scale-95 transition-all uppercase tracking-widest text-xs">
+						Nossos Serviços
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Diferenciais -->
+	<section class="py-24 md:py-32 bg-gray-50">
+		<div class="container mx-auto px-6 md:px-12">
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+				<div class="p-12 bg-white border-b-8 border-primary shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all group">
+					<div class="text-5xl mb-8 group-hover:scale-110 transition-transform inline-block">⚡</div>
+					<h3 class="text-xl font-black mb-4 uppercase tracking-tight text-gray-900">Instalação Ágil</h3>
+					<p class="text-gray-600 text-sm leading-relaxed">Sua obra não para. Garantimos prazos curtos e cumprimento rigoroso de cronograma em toda a região.</p>
+				</div>
+				<div class="p-12 bg-white border-b-8 border-secondary shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all group">
+					<div class="text-5xl mb-8 group-hover:scale-110 transition-transform inline-block">💎</div>
+					<h3 class="text-xl font-black mb-4 uppercase tracking-tight text-gray-900">Vidros Certificados</h3>
+					<p class="text-gray-600 text-sm leading-relaxed">Materiais que seguem rigorosamente as normas ABNT, garantindo durabilidade e segurança total.</p>
+				</div>
+				<div class="p-12 bg-white border-b-8 border-accent shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all group">
+					<div class="text-5xl mb-8 group-hover:scale-110 transition-transform inline-block">🛡️</div>
+					<h3 class="text-xl font-black mb-4 uppercase tracking-tight text-gray-900">Garantia Real</h3>
+					<p class="text-gray-600 text-sm leading-relaxed">Suporte pós-venda especializado e garantia assistida em todos os nossos serviços e ferragens.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Sobre Nós (Resumo) -->
+	<section class="py-24 md:py-32 bg-white">
+		<div class="container mx-auto px-6 md:px-12">
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+				<div class="bg-accent p-12 md:p-20 text-white shadow-2xl relative overflow-hidden">
+					<div class="absolute top-0 right-0 w-32 h-32 bg-primary translate-x-16 -translate-y-16 rotate-45 opacity-50"></div>
+					<h2 class="text-3xl md:text-5xl font-black mb-8 leading-tight tracking-tighter uppercase text-primary">Excelência em Vidros em {SITE_CONFIG.address.city}.</h2>
+					<p class="text-gray-200 mb-12 text-lg leading-relaxed font-light">Unimos a leveza do vidro com a robustez de um serviço técnico impecável. Cada projeto é tratado como uma obra de arte única.</p>
+					<a href="/sobre" class="inline-block bg-primary text-secondary font-black px-12 py-7 uppercase tracking-widest text-xs hover:scale-105 active:scale-95 transition-all shadow-xl shadow-primary/20">
+						Nossa História
+					</a>
+				</div>
+				<div class="grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl overflow-hidden group">
+					<img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop" alt="Instalação de Vidro Premium" class="group-hover:scale-110 transition-transform duration-[2000ms]" />
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Nossos Serviços -->
+	<section class="py-24 md:py-32 bg-gray-50">
+		<div class="container mx-auto px-6 md:px-12">
+			<div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+				<div class="max-w-2xl">
+					<h2 class="text-4xl md:text-6xl font-black mb-6 tracking-tighter uppercase">Serviços de Elite</h2>
+					<p class="text-lg text-gray-600 leading-relaxed font-medium">Como uma vidraçaria em Porto Alegre focada em qualidade, oferecemos soluções residenciais e comerciais com o mais alto padrão de acabamento.</p>
+				</div>
+				<a href="/servicos" class="text-secondary font-black border-b-4 border-primary pb-2 uppercase tracking-widest text-xs hover:text-accent transition-colors hover:scale-105 inline-block">
+					Ver Tudo
+				</a>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+				{services.map(service => (
+					<a href={`/servicos/${service.slug}`} class="group bg-white p-12 shadow-sm hover:shadow-2xl transition-all border-l-[12px] border-gray-100 hover:border-primary flex flex-col justify-between">
+						<div>
+							<h3 class="text-2xl font-black mb-6 uppercase group-hover:text-secondary transition-colors tracking-tight leading-none">{service.data.title}</h3>
+							<p class="text-gray-600 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">{service.data.description}</p>
+						</div>
+						<span class="text-secondary font-black text-[10px] uppercase tracking-[0.2em] group-hover:translate-x-4 inline-block transition-transform">Ver Detalhes &rarr;</span>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- Depoimentos -->
+	<section class="py-24 md:py-32 bg-white">
+		<div class="container mx-auto px-6 md:px-12">
+			<h2 class="text-4xl md:text-6xl font-black mb-24 text-center uppercase tracking-tighter">Quem Escolhe a Excelência</h2>
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+				{[1, 2, 3].map((_, i) => (
+					<div class="p-12 bg-gray-50 relative group hover:bg-secondary transition-colors duration-500">
+						<div class="text-7xl text-primary opacity-20 absolute top-4 left-4 font-serif">"</div>
+						<p class="text-gray-600 text-lg mb-10 relative z-10 group-hover:text-white transition-colors italic leading-relaxed">
+							{i === 0 && "O box do meu banheiro ficou perfeito. A instalação foi rápida e a equipe extremamente profissional."}
+							{i === 1 && "Fizemos o fechamento da sacada e os espelhos. Acabamento impecável, superou expectativas."}
+							{i === 2 && "Preço justo e pontualidade britânica. Melhor vidraçaria que já contratei na região."}
+						</p>
+						<div class="flex items-center gap-4 relative z-10">
+							<div class="w-12 h-12 bg-primary rounded-none shadow-lg group-hover:bg-white transition-colors"></div>
+							<div>
+								<p class="font-black text-gray-900 group-hover:text-white transition-colors uppercase text-sm">
+									{i === 0 && "Ricardo Mendes"}
+									{i === 1 && "Carla Souza"}
+									{i === 2 && "André Lima"}
+								</p>
+								<p class="text-[10px] text-gray-500 group-hover:text-primary transition-colors font-bold uppercase tracking-widest">
+									{i === 0 && "Bairro Moinhos de Vento"}
+									{i === 1 && "Bairro Menino Deus"}
+									{i === 2 && "Bairro Petrópolis"}
+								</p>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA Final -->
+	<section class="py-24 md:py-32 bg-secondary text-white relative overflow-hidden">
+		<div class="absolute inset-0 opacity-10 pointer-events-none">
+			<div class="absolute -top-1/2 -left-1/4 w-full h-full bg-primary rotate-12 rounded-[100px]"></div>
+		</div>
+		<div class="container mx-auto px-6 md:px-12 text-center relative z-10">
+			<h2 class="text-4xl md:text-6xl font-black mb-10 tracking-tighter uppercase leading-none text-primary">Transforme sua casa <br/> com vidros de alto padrão.</h2>
+			<p class="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto mb-16 font-light">Se você busca o melhor telefone de vidraçaria para orçamentos precisos, fale agora com nossa vidraçaria em Porto Alegre e receba atendimento imediato.</p>
+			<div class="flex flex-col md:flex-row justify-center gap-8">
+				<a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(SITE_CONFIG.contact.message)}`} class="bg-primary text-secondary font-black px-16 py-8 uppercase tracking-[0.2em] text-sm hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-primary/40">
+					Falar no WhatsApp
+				</a>
+			</div>
+		</div>
+	</section>
+</Layout>

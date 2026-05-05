@@ -1,4 +1,4 @@
----
+﻿---
 title: "Porta de Vidro Temperado em Porto Alegre"
 description: "Fabricação e instalação de portas de vidro temperado em Porto Alegre. Portas de correr, pivotantes e automáticas para lojas e residências."
 image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop"
@@ -6,7 +6,7 @@ image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000
 
 # Porta de Vidro Temperado em Porto Alegre: Funcionalidade e Design
 
-Portas de vidro são sinônimo de modernidade e praticidade. Na **Vidra�aria Essencial**, projetamos e instalamos portas de vidro temperado sob medida em Porto Alegre, focando na suavidade do manuseio e na durabilidade das ferragens.
+Portas de vidro são sinônimo de modernidade e praticidade. Na **Vidraçaria Essencial**, projetamos e instalamos portas de vidro temperado sob medida em Porto Alegre, focando na suavidade do manuseio e na durabilidade das ferragens.
 
 
 ## Modelos e Versatilidade
@@ -31,3 +31,5 @@ Utilizamos molas de piso e ferragens de marcas líderes de mercado, garantindo q
 
 
 Ideal para lojas, escritórios e divisões internas de residências em Porto Alegre e arredores.
+
+

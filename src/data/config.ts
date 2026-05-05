@@ -17,7 +17,8 @@ export const SITE_CONFIG = {
     message: 'Olá vim do site, Vidro Essencial Porto Alegre, e gostaria de fazer um Orçamento'
   },
   social: {
-    instagram: 'vidroessencialpoa',
-    facebook: 'vidroessencialpoa'
+    instagram: 'https://www.instagram.com/vidro_essencial/',
+    facebook: 'https://www.facebook.com/profile.php?id=61589136667939',
+    twitter: 'https://x.com/EssencialV84478'
   }
 };

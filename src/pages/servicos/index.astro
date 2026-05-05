@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { SITE_CONFIG } from '../../data/config';
+
+const services = await getCollection('servicos');
+---
+
+<Layout title={`Nossos Serviços | ${SITE_CONFIG.name}`}>
+	<section class="py-24 md:py-32">
+		<div class="container mx-auto px-6 md:px-12">
+			<h1 class="text-5xl md:text-7xl font-black mb-16 tracking-tighter">Nossos Serviços</h1>
+			
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+				{services.map(service => (
+					<a href={`/servicos/${service.slug}`} class="group block bg-white p-12 border-b-8 border-primary shadow-sm hover:shadow-2xl transition-all">
+						<h2 class="text-2xl font-black mb-6 uppercase group-hover:text-secondary">{service.data.title}</h2>
+						<p class="text-gray-600 mb-8">{service.data.description}</p>
+						<span class="text-secondary font-bold text-sm uppercase tracking-widest">Saiba mais &rarr;</span>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
+</Layout>

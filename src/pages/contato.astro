@@ -47,6 +47,13 @@ import { SITE_CONFIG } from '../data/config';
 							Solicitar Orçamento Grátis
 						</button>
 					</form>
+					
+					<div class="mt-8 text-center">
+						<p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Preferência por e-mail?</p>
+						<a href={`mailto:${SITE_CONFIG.contact.email}`} class="text-secondary font-black hover:text-accent transition-colors border-b-2 border-secondary/20 hover:border-accent italic">
+							{SITE_CONFIG.contact.email}
+						</a>
+					</div>
 				</div>
 
 				<!-- NAP & Info -->

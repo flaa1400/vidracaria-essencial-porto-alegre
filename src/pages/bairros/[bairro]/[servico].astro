@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import LocalizedContent from '../../../components/LocalizedContent.astro';
+import { SITE_CONFIG } from '../../../data/config';
+import { BAIRROS } from '../../../data/bairros';
+
+export async function getStaticPaths() {
+  const serviceEntries = await getCollection('servicos');
+  const paths = [];
+
+  for (const bairro of BAIRROS) {
+    for (const service of serviceEntries) {
+      paths.push({
+        params: { bairro: bairro.slug, servico: service.slug },
+        props: { bairro, service },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { bairro, service } = Astro.props;
+const { Content } = await service.render();
+
+// Localize content
+const localizedTitle = service.data.title.replace(/Porto Alegre/g, `${bairro.name} em Porto Alegre`);
+const localizedDescription = service.data.description.replace(/Porto Alegre/g, `${bairro.name} em Porto Alegre`);
+---
+
+<Layout title={`${localizedTitle} | ${SITE_CONFIG.name}`}>
+  <!-- Service Hero -->
+  <section class="py-24 md:py-32 bg-gray-50 border-b border-gray-100">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="max-w-4xl">
+        <a href={`/bairros/${bairro.slug}`} class="text-secondary font-black uppercase tracking-[0.2em] text-[10px] mb-12 inline-block hover:text-primary hover:-translate-x-2 transition-all">
+          &larr; Voltar para {bairro.name}
+        </a>
+        <h1 class="text-4xl md:text-6xl font-black mb-10 tracking-tighter leading-tight uppercase text-gray-900">{localizedTitle}</h1>
+        <p class="text-lg md:text-2xl text-gray-600 leading-relaxed font-medium italic border-l-8 border-primary pl-8">{localizedDescription}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 md:py-32 bg-white">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-24">
+        
+        <!-- Main Content -->
+        <div class="lg:col-span-2">
+          <div class="mb-24">
+            <h2 class="text-2xl font-black mb-12 uppercase tracking-[0.2em] text-secondary">Detalhes do Serviço em {bairro.name}</h2>
+            <article class="prose prose-lg prose-slate max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-p:leading-relaxed prose-p:mb-12 prose-strong:text-secondary">
+              <LocalizedContent bairroName={bairro.name}>
+                <Content />
+              </LocalizedContent>
+            </article>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="p-12 bg-accent text-white group hover:bg-secondary transition-colors duration-500">
+              <h3 class="font-black mb-8 uppercase tracking-widest text-xs text-primary">Vantagens para {bairro.name}</h3>
+              <ul class="space-y-5 text-sm font-bold">
+                <li class="flex items-center gap-4"><span class="text-primary">▶</span> Atendimento Rápido na Região</li>
+                <li class="flex items-center gap-4"><span class="text-primary">▶</span> Durabilidade Premium</li>
+                <li class="flex items-center gap-4"><span class="text-primary">▶</span> Segurança ABNT Certificada</li>
+              </ul>
+            </div>
+            <div class="p-12 bg-primary text-secondary">
+              <h3 class="font-black mb-8 uppercase tracking-widest text-[10px] text-secondary/60">Ideal para {bairro.name}</h3>
+              <ul class="space-y-5 text-sm font-bold">
+                <li class="flex items-center gap-4"><span>■</span> Residências de Alto Padrão</li>
+                <li class="flex items-center gap-4"><span>■</span> Comércios em Porto Alegre</li>
+                <li class="flex items-center gap-4"><span>■</span> Condomínios e Prédios</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sticky CTA Sidebar -->
+        <div class="lg:col-span-1">
+          <div class="sticky top-32 space-y-10">
+            <div class="bg-secondary p-12 text-white shadow-2xl shadow-secondary/40 relative group overflow-hidden">
+              <div class="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+              <div class="relative z-10">
+                <h3 class="text-3xl font-black mb-8 uppercase leading-tight tracking-tighter text-primary">Orçamento em {bairro.name}</h3>
+                <p class="text-blue-50 mb-12 text-base leading-relaxed font-medium">Fale agora com nosso técnico e peça seu orçamento para {localizedTitle}.</p>
+                <div class="space-y-5">
+                  <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento para ${localizedTitle}.`)}`} class="block w-full bg-primary text-secondary font-black p-8 text-center uppercase tracking-widest text-xs hover:scale-105 active:scale-95 transition-all">
+                    Chamar no Whatsapp
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="p-12 border-[6px] border-gray-50 flex flex-col gap-6 text-center">
+              <span class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-300">Cobertura Total</span>
+              <p class="text-xs text-gray-500 leading-relaxed font-bold uppercase">Atendemos todos os endereços do bairro {bairro.name} em Porto Alegre com rapidez.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

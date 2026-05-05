@@ -1,4 +1,4 @@
-export const SITE_CONFIG = {
+﻿export const SITE_CONFIG = {
   domain: 'https://vidroessencialportoalegre.com.br',
   name: 'Vidro Essencial Porto Alegre',
   tagline: 'Líder em Vidros e Espelhos de Alta Performance',
@@ -22,3 +22,4 @@ export const SITE_CONFIG = {
     twitter: 'https://x.com/EssencialV84478'
   }
 };
+

@@ -1,9 +1,12 @@
-﻿---
+---
 import SEO from '../components/SEO.astro';
 import SchemaLocalBusiness from '../components/SchemaLocalBusiness.astro';
 import WhatsAppBtn from '../components/WhatsAppBtn.astro';
 import { SITE_CONFIG } from '../data/config';
 import { BAIRROS } from '../data/bairros';
+import { Image } from 'astro:assets';
+import logoHeader from '../assets/logo-header.png.png';
+import logoSquare from '../assets/logo.png';
 
 interface Props {
 	title?: string;
@@ -20,14 +23,15 @@ const { title, description } = Astro.props;
 		<SchemaLocalBusiness />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"></noscript>
 	</head>
 	<body class="bg-white text-gray-600 antialiased font-sans overflow-x-hidden">
 		<!-- Header -->
 		<header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-xl border-b border-gray-100">
 			<div class="container mx-auto px-6 md:px-12 py-5 flex justify-between items-center">
-				<a href="/" class="hover:scale-105 transition-all">
-					<img src="/logo-header.png.png" alt={SITE_CONFIG.name} class="h-36 w-auto object-contain" />
+				<a href="/" class="hover:scale-105 transition-all" aria-label="Voltar para o Início">
+					<Image src={logoHeader} alt={SITE_CONFIG.name} class="h-20 md:h-24 w-auto object-contain" fetchpriority="high" loading="eager" />
 				</a>
 				
 				<!-- Desktop Nav -->
@@ -40,7 +44,7 @@ const { title, description } = Astro.props;
 				</nav>
 
 				<!-- Mobile Toggle -->
-				<button id="menu-open" class="md:hidden text-secondary p-2 hover:scale-110 transition-all">
+				<button id="menu-open" class="md:hidden text-secondary p-2 hover:scale-110 transition-all" aria-label="Abrir Menu">
 					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
 				</button>
 			</div>
@@ -48,13 +52,13 @@ const { title, description } = Astro.props;
 
 		<!-- Mobile Drawer -->
 		<div id="mobile-menu" class="fixed inset-0 z-[999] bg-accent translate-x-full transition-transform duration-500 ease-in-out md:hidden flex flex-col justify-center items-center text-center p-12">
-			<button id="menu-close" class="absolute top-10 right-10 text-primary hover:scale-110 transition-all">
+			<button id="menu-close" class="absolute top-10 right-10 text-primary hover:scale-110 transition-all" aria-label="Fechar Menu">
 				<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
 			</button>
 
 			<div class="mb-16">
 				<div class="inline-block bg-white p-6 rounded-2xl shadow-2xl">
-					<img src="/logo.png" alt={SITE_CONFIG.name} class="h-32 w-auto object-contain" />
+					<Image src={logoSquare} alt={SITE_CONFIG.name} class="h-32 w-auto object-contain" />
 				</div>
 			</div>
 			
@@ -84,7 +88,7 @@ const { title, description } = Astro.props;
 				<div class="md:col-span-1">
 					<div class="mb-8">
 						<div class="inline-block bg-white p-5 rounded-2xl shadow-xl">
-							<img src="/logo.png" alt={SITE_CONFIG.name} class="h-28 w-auto object-contain" />
+							<Image src={logoSquare} alt={SITE_CONFIG.name} class="h-28 w-auto object-contain" />
 						</div>
 					</div>
 					<p class="text-gray-300 leading-relaxed text-sm mb-10">{SITE_CONFIG.description}</p>

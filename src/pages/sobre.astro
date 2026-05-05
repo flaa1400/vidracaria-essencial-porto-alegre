@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE_CONFIG } from '../data/config';
+---
+
+<Layout title={`Sobre Nós | ${SITE_CONFIG.name}`}>
+	<!-- Hero / História -->
+	<section class="py-24 md:py-32 bg-white">
+		<div class="container mx-auto px-6 md:px-12">
+			<h1 class="text-4xl md:text-6xl font-black mb-20 tracking-tighter uppercase text-gray-900">Nossa Trajetória</h1>
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+				<div class="space-y-10 text-lg md:text-xl text-gray-600 leading-relaxed font-medium">
+					<p class="border-l-8 border-primary pl-10 italic text-2xl text-gray-900 font-black tracking-tight uppercase leading-tight">Elevando o padrão dos vidros em {SITE_CONFIG.address.city} há mais de uma década.</p>
+					<p>A {SITE_CONFIG.name} nasceu com a missão de trazer técnica apurada e atendimento humanizado para o setor de vidraçaria. Em nossa região, somos conhecidos pela pontualidade e limpeza impecável em cada obra.</p>
+					<p>Nosso diferencial está no detalhe: da medição digital à instalação final, cada milímetro é respeitado para garantir a perfeição estética e segurança máxima para sua família ou empresa.</p>
+				</div>
+				<div class="relative group overflow-hidden shadow-2xl">
+					<img src="/fachada-real.png.png" alt="" class="group-hover:scale-110 transition-transform duration-[3000ms]" />
+					<div class="absolute inset-0 border-[20px] border-white/20 pointer-events-none"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Missão, Visão e Valores -->
+	<section class="py-24 md:py-32 bg-accent text-white">
+		<div class="container mx-auto px-6 md:px-12">
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+				<div class="p-12 border-4 border-white/10 hover:border-primary transition-colors group">
+					<h3 class="text-xs font-black mb-8 uppercase tracking-[0.3em] text-primary">Missão</h3>
+					<p class="text-xl font-bold leading-tight group-hover:text-primary transition-colors">Transformar ambientes através de soluções em vidro que unem tecnologia e design contemporâneo.</p>
+				</div>
+				<div class="p-12 border-4 border-white/10 hover:border-primary transition-colors group">
+					<h3 class="text-xs font-black mb-8 uppercase tracking-[0.3em] text-primary">Visão</h3>
+					<p class="text-xl font-bold leading-tight group-hover:text-primary transition-colors">Ser a referência absoluta em vidraçaria premium e atendimento técnico no estado.</p>
+				</div>
+				<div class="p-12 border-4 border-white/10 hover:border-primary transition-colors group">
+					<h3 class="text-xs font-black mb-8 uppercase tracking-[0.3em] text-primary">Valores</h3>
+					<ul class="space-y-4 text-sm font-black uppercase tracking-widest group-hover:text-primary transition-colors">
+						<li>• Ética Inabalável</li>
+						<li>• Precisão Técnica</li>
+						<li>• Transparência Total</li>
+						<li>• Foco no Cliente</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Segurança NR-18 -->
+	<section class="py-24 md:py-32 bg-gray-50 text-center">
+		<div class="container mx-auto px-6 md:px-12 max-w-4xl">
+			<h2 class="text-3xl md:text-5xl font-black mb-12 uppercase tracking-tighter leading-none">Segurança é Nossa Prioridade</h2>
+			<p class="text-lg md:text-xl text-gray-600 mb-16 leading-relaxed font-medium italic">Operamos sob as mais rígidas normas técnicas (ABNT, NR-18 e NR-35). Nossa equipe é treinada para lidar com projetos de alta complexidade com foco total em segurança e qualidade em toda a Grande Porto Alegre.</p>
+			<div class="inline-flex items-center gap-4 bg-secondary text-white px-14 py-8 font-black uppercase tracking-widest text-sm shadow-2xl shadow-secondary/30 hover:scale-105 active:scale-95 transition-all">
+				Equipe Certificada & Treinada
+			</div>
+		</div>
+	</section>
+</Layout>

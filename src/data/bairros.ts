@@ -1,4 +1,4 @@
-export const BAIRROS = [
+﻿export const BAIRROS = [
   { slug: 'anchieta', name: 'Anchieta', title: 'Vidraçaria na Anchieta em Porto Alegre' },
   { slug: 'belem-novo', name: 'Belém Novo', title: 'Vidraçaria em Belém Novo em Porto Alegre' },
   { slug: 'azenha', name: 'Azenha', title: 'Vidraçaria em Azenha em Porto Alegre' },
@@ -32,3 +32,4 @@ export const BAIRROS = [
   { slug: 'higienopolis', name: 'Higienópolis', title: 'Vidraçaria em Higienópolis em Porto Alegre' },
   { slug: 'lomba-do-pinheiro', name: 'Lomba do Pinheiro', title: 'Vidraçaria em Lomba do Pinheiro em Porto Alegre' }
 ];
+

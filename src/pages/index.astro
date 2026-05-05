@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { SITE_CONFIG } from '../data/config';
@@ -68,7 +68,7 @@ const services = (await getCollection('servicos')).slice(0, 6);
 					</a>
 				</div>
 				<div class="grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl overflow-hidden group">
-					<img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop" alt="Instalação de Vidro Premium" class="group-hover:scale-110 transition-transform duration-[2000ms]" />
+					<img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop" alt="Instalação de Vidro Premium" class="group-hover:scale-110 transition-transform duration-[2000ms]" loading="lazy" decoding="async" />
 				</div>
 			</div>
 		</div>

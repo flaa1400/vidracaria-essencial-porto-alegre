@@ -1,6 +1,7 @@
----
+﻿---
 const html = await Astro.slots.render('default');
 const { bairroName } = Astro.props;
 const localizedHtml = html.replace(/Porto Alegre/g, `${bairroName} em Porto Alegre`);
 ---
 <div set:html={localizedHtml} />
+

@@ -29,7 +29,7 @@ const localizedTitle = service.data.title.replace(/Porto Alegre/g, `${bairro.nam
 const localizedDescription = service.data.description.replace(/Porto Alegre/g, `${bairro.name} em Porto Alegre`);
 ---
 
-<Layout title={localizedTitle}>
+<Layout title={`${localizedTitle.replace(/ Porto Alegre/g, ' POA')} | Elite`}>
   <!-- Service Hero -->
   <section class="py-24 md:py-32 bg-gray-50 border-b border-gray-100">
     <div class="container mx-auto px-6 md:px-12">

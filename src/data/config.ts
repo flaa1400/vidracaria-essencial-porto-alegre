@@ -1,6 +1,6 @@
-﻿export const SITE_CONFIG = {
+export const SITE_CONFIG = {
   domain: 'https://vidroessencialportoalegre.com.br',
-  name: 'Vidro Essencial Porto Alegre',
+  name: 'Vidro Essencial',
   tagline: 'Líder em Vidros e Espelhos de Alta Performance',
   description: 'Vidraçaria em Porto Alegre especializada em box de banheiro, espelhos sob medida e fechamento de sacadas. Acabamento premium e segurança garantida para seu projeto.',
   address: {

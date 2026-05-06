@@ -14,7 +14,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<Layout title={`${entry.data.title.replace(/Porto Alegre/g, 'POA')} | Elite`}>
+<Layout title={`${entry.data.title.split(' em Porto Alegre')[0]} | Porto Alegre`}>
 	<!-- Service Hero -->
 	<section class="py-24 md:py-32 bg-gray-50 border-b border-gray-100">
 		<div class="container mx-auto px-6 md:px-12">

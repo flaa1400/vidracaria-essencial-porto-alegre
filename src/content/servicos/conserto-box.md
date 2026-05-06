@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Conserto de Box de Banheiro em Porto Alegre"
 description: "Serviço rápido de conserto de box de banheiro em Porto Alegre. Troca de roldanas, guias, batedores e regulagem de portas de vidro."
 image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=2000&auto=format&fit=crop"
@@ -6,7 +6,7 @@ image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=2000&au
 
 # Conserto de Box de Banheiro em Porto Alegre: Agilidade e Eficiência
 
-Um box de banheiro travado ou com peças desgastadas pode ser um perigo real de quebra. A **Vidraçaria Essencial** oferece atendimento rápido em Porto Alegre para o conserto de todos os tipos de box de vidro temperado.
+Um box de banheiro travado ou com peças desgastadas pode ser um perigo real de quebra. A **Vidro Essencial** oferece atendimento rápido em Porto Alegre para o conserto de todos os tipos de box de vidro temperado.
 
 
 ## Problemas Comuns que Resolvemos

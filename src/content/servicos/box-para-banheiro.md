@@ -1,12 +1,12 @@
-﻿---
+---
 title: "Box para Banheiro em Porto Alegre"
 description: "Especialista em instalação de Box para Banheiro em Porto Alegre. Vidros temperados de 8mm com certificação de segurança e design moderno para seu projeto."
-icon: "ðŸš¿"
+icon: "🚿"
 ---
 
 ## Transforme seu Banheiro com Box de Vidro Premium
 
-Procurando por **Box para Banheiro em Porto Alegre**? A Vidraçaria Essencial é especialista em transformar banheiros comuns em espaços de luxo e funcionalidade. Trabalhamos com as melhores ferragens e vidros temperados do mercado, garantindo um acabamento impecável e durabilidade extrema.
+Procurando por **Box para Banheiro em Porto Alegre**? A Vidro Essencial é especialista em transformar banheiros comuns em espaços de luxo e funcionalidade. Trabalhamos com as melhores ferragens e vidros temperados do mercado, garantindo um acabamento impecável e durabilidade extrema.
 
 ### Por que escolher nosso Box de Vidro?
 
@@ -27,7 +27,7 @@ Atendemos a todos os tipos de projetos em Porto Alegre:
 
 ### Especialista em Vidros em Porto Alegre
 
-Nossa equipe técnica realiza medições precisas e instalações limpas para garantir o melhor resultado em sua obra. A Vidraçaria Essencial Porto Alegre é sinônimo de pontualidade e excelência técnica em todos os serviços prestados na capital.
+Nossa equipe técnica realiza medições precisas e instalações limpas para garantir o melhor resultado em sua obra. A Vidro Essencial Porto Alegre é sinônimo de pontualidade e excelência técnica em todos os serviços prestados na capital.
 
 > **Dica de Especialista:** Sempre verifique se o seu box possui o selo de qualidade e se a instalação segue as normas da ABNT. Segurança para sua família não tem preço.
 

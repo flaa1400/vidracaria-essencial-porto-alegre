@@ -1,12 +1,12 @@
-﻿---
+---
 title: "Vidros sob Medida em Porto Alegre"
 description: "Corte e instalação de vidros sob medida em Porto Alegre. Vidros para tampos de mesa, prateleiras, quadros e projetos especiais."
 image: "https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?q=80&w=2000&auto=format&fit=crop"
 ---
 
-# Vidros Sob Medida em Porto Alegre: Soluções para seu Projeto Ãšnico
+# Vidros Sob Medida em Porto Alegre: Soluções para seu Projeto Único
 
-Precisa de um vidro com medidas específicas para um móvel ou projeto decorativo? A **Vidraçaria Essencial** atende todas as demandas de vidros sob medida em Porto Alegre, com corte preciso e acabamento de alta qualidade.
+Precisa de um vidro com medidas específicas para um móvel ou projeto decorativo? A **Vidro Essencial** atende todas as demandas de vidros sob medida em Porto Alegre, com corte preciso e acabamento de alta qualidade.
 
 
 ## Projetos Personalizados

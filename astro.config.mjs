@@ -10,6 +10,8 @@ export default defineConfig({
   adapter: vercel(),
   integrations: [
     tailwind(),
-    sitemap()
+    sitemap({
+      filter: (page) => page !== SITE_CONFIG.domain + '/404'
+    })
   ],
 });

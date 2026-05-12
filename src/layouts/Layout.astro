@@ -12,20 +12,20 @@ import logoSquare from '../assets/logo.png';
 interface Props {
 	title?: string;
 	description?: string;
+	canonicalURL?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, canonicalURL } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="pt-BR">
 	<head>
-		<SEO title={title} description={description} />
+		<SEO title={title} description={description} canonicalURL={canonicalURL} />
 		<SchemaLocalBusiness />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-		<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 	</head>
 	<body class="bg-white text-gray-600 antialiased font-sans overflow-x-hidden">
 		<!-- Header -->

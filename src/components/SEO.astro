@@ -1,19 +1,22 @@
-﻿---
+---
 import { SITE_CONFIG } from '../data/config';
 
 interface Props {
 	title?: string;
 	description?: string;
 	image?: string;
-	canonicalURL?: URL;
+	canonicalURL?: string;
 }
 
 const {
 	title = SITE_CONFIG.name,
 	description = SITE_CONFIG.description,
 	image = '/og-image.jpg',
-	canonicalURL = new URL(Astro.url.pathname, Astro.site),
+	canonicalURL = Astro.props.canonicalURL || new URL(Astro.url.pathname, Astro.site).toString(),
 } = Astro.props;
+
+// Normalização da URL canônica (remover barra final se existir, exceto na home)
+const canonical = canonicalURL.replace(/\/$/, "");
 
 const fullTitle = title === SITE_CONFIG.name ? title : `${title} | ${SITE_CONFIG.name}`;
 ---
@@ -25,7 +28,7 @@ const fullTitle = title === SITE_CONFIG.name ? title : `${title} | ${SITE_CONFIG
 <meta name="generator" content={Astro.generator} />
 
 <!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
+<link rel="canonical" href={canonical} />
 
 <!-- Primary Meta Tags -->
 <title>{fullTitle}</title>

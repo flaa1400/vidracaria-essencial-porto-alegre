@@ -6,7 +6,7 @@ image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2000
 
 # Envidraçamento de Sacada em Porto Alegre: Ganhe um Novo Cômodo
 
-O envidraçamento de sacada permite que você utilize essa área do apartamento durante todo o ano, independentemente do clima de Porto Alegre. A **Vidraçaria Essencial** utiliza sistemas certificados que garantem a segurança e a leveza no manuseio.
+O envidraçamento de sacada permite que você utilize essa área do apartamento durante todo o ano, independentemente do clima de Porto Alegre. A **Vidro Essencial** utiliza sistemas certificados que garantem a segurança e a leveza no manuseio.
 
 
 ## Segurança Certificada

@@ -6,7 +6,7 @@ image: "https://images.unsplash.com/photo-1582262048232-fe939dc6581d?q=80&w=2070
 
 # Manutenção em Sacadas de Vidro em Porto Alegre: Segurança em Primeiro Lugar
 
-O sistema de envidraçamento de sacada exige revisões periódicas para garantir o funcionamento suave e, principalmente, a segurança dos usuários. A **Vidraçaria Essencial** oferece um serviço completo de manutenção preventiva e corretiva em Porto Alegre.
+O sistema de envidraçamento de sacada exige revisões periódicas para garantir o funcionamento suave e, principalmente, a segurança dos usuários. A **Vidro Essencial** oferece um serviço completo de manutenção preventiva e corretiva em Porto Alegre.
 
 
 ## Quando chamar a manutenção?

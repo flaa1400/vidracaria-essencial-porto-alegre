@@ -6,7 +6,7 @@ image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2000
 
 # Guarda Corpo de Vidro em Porto Alegre: Segurança com Transparência
 
-O guarda corpo de vidro é o elemento ideal para quem busca segurança máxima sem obstruir a visão ou o design do ambiente. A **Vidraçaria Essencial** realiza projetos rigorosos em Porto Alegre, seguindo todas as normas de segurança vigentes.
+O guarda corpo de vidro é o elemento ideal para quem busca segurança máxima sem obstruir a visão ou o design do ambiente. A **Vidro Essencial** realiza projetos rigorosos em Porto Alegre, seguindo todas as normas de segurança vigentes.
 
 
 ## Rigor Técnico e Normas

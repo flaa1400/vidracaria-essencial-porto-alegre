@@ -6,7 +6,7 @@ image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2000
 
 # Fechamento de Varanda com Vidro em Porto Alegre: Mais Espaço para Você
 
-Proteja sua varanda do vento e da poeira de Porto Alegre com os fechamentos de vidro da **Vidraçaria Essencial**. Nossas soluções são projetadas para transformar sua varanda em um ambiente útil durante todo o ano.
+Proteja sua varanda do vento e da poeira de Porto Alegre com os fechamentos de vidro da **Vidro Essencial**. Nossas soluções são projetadas para transformar sua varanda em um ambiente útil durante todo o ano.
 
 
 ## Qualidade e Vedação
@@ -18,7 +18,7 @@ O diferencial do nosso serviço está na vedação. Utilizamos as melhores marca
 As ferragens utilizadas possuem tratamento contra oxidação, essencial para a durabilidade em regiões com umidade constante.
 
 
-## Diferenciais Vidraçaria Essencial
+## Diferenciais Vidro Essencial
 
 
 *   **Instalação Limpa:** Nossa equipe é treinada para realizar a obra com o mínimo de sujeira e ruído.

@@ -6,7 +6,7 @@ image: "https://images.unsplash.com/photo-1582262048232-fe939dc6581d?q=80&w=2070
 
 # Manutenção de Cortina de Vidro em Porto Alegre: Preserve seu Investimento
 
-Sistemas de cortina de vidro (envidraçamento panorâmico) possuem muitas partes móveis que sofrem desgaste com o tempo. A **Vidraçaria Essencial** é especialista na manutenção desses sistemas em Porto Alegre, devolvendo a funcionalidade original.
+Sistemas de cortina de vidro (envidraçamento panorâmico) possuem muitas partes móveis que sofrem desgaste com o tempo. A **Vidro Essencial** é especialista na manutenção desses sistemas em Porto Alegre, devolvendo a funcionalidade original.
 
 
 ## Por que fazer a manutenção?

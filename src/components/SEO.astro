@@ -8,12 +8,11 @@ interface Props {
 	canonicalURL?: string;
 }
 
-const {
-	title = SITE_CONFIG.name,
-	description = SITE_CONFIG.description,
-	image = '/og-image.jpg',
-	canonicalURL = Astro.props.canonicalURL || new URL(Astro.url.pathname, Astro.site).toString(),
-} = Astro.props;
+const title = Astro.props.title || SITE_CONFIG.name;
+const description = Astro.props.description || SITE_CONFIG.description;
+const image = Astro.props.image || '/og-image.jpg';
+const canonicalURL = Astro.props.canonicalURL || new URL(Astro.url.pathname, Astro.site).toString();
+
 
 // Normalização da URL canônica (remover barra final se existir, exceto na home)
 const canonical = canonicalURL.replace(/\/$/, "");

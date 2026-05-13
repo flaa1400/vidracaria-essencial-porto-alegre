@@ -6,7 +6,7 @@ image: "https://images.unsplash.com/photo-1590059305141-8f5223e74730?q=80&w=2000
 
 # Cortina de Vidro em Porto Alegre: Visão Panorâmica e Elegância
 
-A cortina de vidro é o sistema mais sofisticado para quem deseja integrar ambientes e aproveitar a vista de Porto Alegre. Com a **Vidraçaria Essencial**, sua sacada ganha um novo nível de aproveitamento, protegida do barulho e da chuva.
+A cortina de vidro é o sistema mais sofisticado para quem deseja integrar ambientes e aproveitar a vista de Porto Alegre. Com a **Vidro Essencial**, sua sacada ganha um novo nível de aproveitamento, protegida do barulho e da chuva.
 
 
 ## Design Minimalista

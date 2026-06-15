@@ -5,10 +5,10 @@
       "has": [
         {
           "type": "host",
-          "value": "vidroessencialportoalegre.com.br"
+          "value": "www.vidroessencialportoalegre.com.br"
         }
       ],
-      "destination": "https://www.vidroessencialportoalegre.com.br/$1",
+      "destination": "https://vidroessencialportoalegre.com.br/$1",
       "permanent": true
     }
   ]

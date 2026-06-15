@@ -24,50 +24,256 @@ export async function getStaticPaths() {
 const { bairro, service } = Astro.props;
 const { Content } = await service.render();
 
-// Localize content
-const localizedTitle = service.data.title.replace(/Porto Alegre/g, `${bairro.name} em Porto Alegre`);
-const localizedDescription = service.data.description.replace(/Porto Alegre/g, `${bairro.name} em Porto Alegre`);
+const serviceName = service.data.title.replace(" em Porto Alegre", "");
+const keyword = `${serviceName} ${bairro.prep} ${bairro.name} Porto Alegre`;
+
+// Indices for combinatorics
+const bIndex = BAIRROS.findIndex(b => b.slug === bairro.slug);
+const servicesList = await getCollection('servicos');
+const sIndex = servicesList.findIndex(s => s.slug === service.slug);
+const combineIndex = bIndex + sIndex;
+
+// Dynamic Text Pools to generate ~1000-1500 words per page (no asterisks, formatted via HTML)
+const introSecTemplates = [
+  `oferece soluções sob medida e excelência técnica para residências, escritórios e condomínios que buscam o mais alto padrão em vidros. A Vidro Essencial realiza um mapeamento detalhado das características arquitetônicas da região para garantir que cada instalação de ${serviceName} suporte perfeitamente as variações climáticas, ventos e o uso intenso do dia a dia. Nosso compromisso inegociável é entregar um acabamento premium, garantindo que sua obra no bairro tenha a sofisticação estética que você merece. Priorizamos insumos certificados, roldanas de latão e silicone de cura neutra para máxima segurança e vedação total contra umidade.`,
+  
+  `atende à crescente demanda de proprietários e arquitetos locais por design contemporâneo e segurança de ponta. Compreendemos que cada projeto de ${serviceName} possui particularidades estruturais únicas que exigem precisão técnica absoluta. Por isso, adotamos um processo exclusivo que engloba desde a consultoria inicial do vidro ideal (temperado de 8mm ou laminado de segurança) até a montagem cirúrgica executada por instaladores treinados. Escolher a Vidro Essencial é optar pelo conforto térmico e acústico da sua família, sabendo que todas as normas técnicas da ABNT estão sendo seguidas à risca em sua residência.`,
+
+  `representa a fusão perfeita entre amplitude visual, iluminação natural e sofisticação para o seu imóvel. A utilização de ${serviceName} é amplamente recomendada na região por sua capacidade de integrar ambientes com leveza e alta durabilidade mecânica. Desenvolvemos métodos avançados de fixação que evitam trepidações e asseguram o deslize ou abertura suave dos painéis de vidro. Nossa equipe de vidraceiros realiza cortes computadorizados e furações precisas na fábrica, o que assegura montagens limpas e rápidas no local, otimizando o andamento da sua obra com total profissionalismo.`
+];
+
+const stepSecTemplates = [
+  `O processo de medição, fabricação e instalação técnica segue um controle de qualidade unificado em 5 fases:
+
+1. <strong>Diagnóstico Estrutural:</strong> Comparecemos ao local para analisar o prumo de alvenaria e o nivelamento do piso por laser, prevendo ajustes milimétricos essenciais para a folha de vidro.
+
+2. <strong>Especificação de Componentes:</strong> Definimos a espessura ideal das placas de vidro e selecionamos a tonalidade dos perfis metálicos (preto fosco, cromado ou champagne) para alinhar ao design do espaço.
+
+3. <strong>Produção Personalizada:</strong> A chapa de vidro é cortada, lapidada contra microfissuras e encaminhada ao forno de têmpera a 650 graus para obter máxima resistência mecânica.
+
+4. <strong>Montagem e Fixação:</strong> Instalamos os perfis estruturais de alumínio e encaixamos os vidros utilizando calços em neoprene e parafusos de aço inox antioxidantes.
+
+5. <strong>Vedação Técnica:</strong> Aplicamos silicones de alta cura e borrachas de vedação para assegurar total estanqueidade e proteção acústica contra ruídos urbanos.`,
+
+  `Para garantir que o serviço atenda a todas as especificidades do seu imóvel, adotamos um roteiro técnico planejado:
+
+1. <strong>Análise de Carga:</strong> Calculamos a distribuição de peso das folhas de vidro e avaliamos se há necessidade de reforço metálico estrutural (comum em tetos de gesso ou paredes drywall).
+
+2. <strong>Projeto Geométrico:</strong> Definimos a paginação correta dos painéis de vidro temperado, otimizando as áreas de abertura e passagens livres para melhor ergonomia de uso.
+
+3. <strong>Lapidação de Segurança:</strong> Processamos as bordas do vidro temperado em maquinários de ponta, removendo tensões que causam quebras espontâneas e garantindo toque suave.
+
+4. <strong>Alinhamento a Laser:</strong> Posicionamos os perfis com níveis eletrônicos de precisão, o que garante que nenhuma roldana ou dobradiça sofra desgaste prematuro por atrito desalinhado.
+
+5. <strong>Regulagem Fina:</strong> Testamos e ajustamos o curso dos trilhos, batentes e fechaduras, assegurando suavidade incomparável no toque e fechamento seguro do sistema.`
+];
+
+const appsSecTemplates = [
+  `A aplicação de ${serviceName} atua diretamente na solução de diversos problemas cotidianos comuns em edificações residenciais e comerciais. Em apartamentos localizados em áreas de grande fluxo de veículos, os painéis de vidro de alta espessura funcionam como excelentes atenuadores acústicos, diminuindo a poluição sonora externa e gerando um ambiente silencioso e relaxante. Já em banheiros e cozinhas, o vidro temperado bloqueia a dispersão de umidade e gordura, protegendo móveis sob medida de alto padrão contra estufamentos e danos. Nas salas corporativas e escritórios, as divisórias de vidro promovem a privacidade dos colaboradores sem bloquear a luz solar, reduzindo gastos com energia elétrica e mantendo a sensação de amplitude e conexão visual em todo o escritório.`,
+
+  `A escolha por estruturas em vidro é uma das decisões mais inteligentes para modernização imobiliária. O fechamento retrátil em varandas ou coberturas de vidro, por exemplo, recupera espaços ociosos da casa durante dias frios ou chuvosos, expandindo a área de convivência social útil da família com total conforto térmico. Nossos espelhos lapidados sob medida também atuam duplicando halls de entrada pequenos ou salas integradas, criando reflexos limpos e profundos que ampliam a iluminação decorativa do ambiente. Todos os projetos contam com vidros de segurança homologados que, em caso de impacto violento, quebram-se em pequenos fragmentos não cortantes de fácil limpeza.`
+];
+
+const maintSecTemplates = [
+  `Para conservar a sua estrutura de vidro com brilho de fábrica e assegurar o perfeito funcionamento dos componentes móveis, indicamos as seguintes práticas de manutenção preventiva:
+
+- <strong>Limpeza Regular:</strong> Use sempre panos de microfibra limpos ou rodos de borracha macia com água morna e sabão neutro. Nunca utilize saponáceos, esponjas de aço ou palha de ferro, pois estes materiais causam riscos permanentes no vidro.
+
+- <strong>Remoção de Manchas:</strong> Em áreas de banho ou externas expostas à água rica em minerais, seque o vidro após o uso para evitar o acúmulo de cálcio. Se houver manchas, remova com uma mistura suave de vinagre de álcool morno e detergente neutro.
+
+- <strong>Cuidado com Trilhos:</strong> Aspire periodicamente os trilhos inferiores para retirar poeira, resíduos de obra e pequenos detritos que possam travar as roldanas e danificar o curso do rolamento.
+
+- <strong>Reaperto e Ajustes:</strong> Se notar folgas nos puxadores, batedores de borracha desgastados ou portas desalinhadas, solicite uma manutenção preventiva profissional imediata para evitar sobrecarga nas dobradiças e quebras.`,
+
+  `Manter a integridade de ${serviceName} é fundamental para a segurança geral dos usuários da casa ou comércio. Siga estas orientações técnicas de conservação:
+
+- <strong>Evite Produtos Químicos Fortes:</strong> Limpa-vidros comuns são excelentes, mas evite soluções que possuam cloro, soda cáustica ou amoníaco, pois estas substâncias corroem o tratamento anodizado do alumínio e degradam o silicone selante.
+
+- <strong>Funcionamento Suave:</strong> Nunca force o deslizamento de portas ou painéis emperrados. O esforço inadequado pode forçar as roldanas fora do trilho e gerar impactos severos nas quinas do vidro, que são os pontos de maior fragilidade térmica.
+
+- <strong>Evite Choques Térmicos Súbitos:</strong> Não jogue água fria diretamente nas placas de vidro que ficaram expostas à radiação solar direta ou vapor térmico prolongado, pois a diferença repentina de temperatura pode induzir a fadiga do vidro.
+
+- <strong>Renovação de Vedantes:</strong> A vedação com silicone tem vida útil limitada. Inspecione visualmente as juntas a cada 18 meses e refaça a vedação caso note sinais de ressecamento para evitar infiltrações graves.`
+];
+
+const faqSecTemplates = [
+  [
+    {
+      q: `Qual o tempo estimado de instalação para ${serviceName} em Porto Alegre?`,
+      a: `O prazo de entrega varia de 7 a 15 dias úteis após a aprovação das medidas físicas. Esse prazo garante a produção personalizada do vidro temperado no forno, corte milimétrico na têmpera e montagem técnica conforme as normas de segurança.`
+    },
+    {
+      q: `Quais as principais vantagens de usar o vidro temperado em relação ao comum?`,
+      a: `O vidro temperado passa por um tratamento de choque térmico controlado que o torna até cinco vezes mais resistente a impactos e variações de calor que o vidro float comum. Caso ocorra quebra, ele se quebra em fragmentos arredondados, evitando cortes graves.`
+    },
+    {
+      q: `O projeto do meu box ou divisória possui garantia contra oxidação das ferragens?`,
+      a: `Sim, oferecemos 1 ano de garantia técnica cobrindo defeitos de têmpera, delaminação e ferrugem de ferragens em latão, inox ou alumínio anodizado. Danos decorrentes de mau uso, batidas ou limpeza inadequada não estão cobertos pela garantia.`
+    },
+    {
+      q: `Como faço para obter um orçamento gratuito pelo WhatsApp?`,
+      a: `Basta clicar no botão e iniciar o contato. Se possível, envie as fotos do espaço e as medidas aproximadas (largura x altura). Nossa equipe de orçamentistas enviará uma estimativa detalhada e agendará a medição final no local.`
+    }
+  ],
+  [
+    {
+      q: `Como é realizada a limpeza preventiva do trilho do box ou janela?`,
+      a: `Use um aspirador de pó com bico fino para retirar o pó e detritos acumulados nos trilhos. Em seguida, limpe com um pano úmido. Nunca utilize óleos minerais, graxa ou vaselina, pois eles atraem poeira e formam uma pasta abrasiva que danifica as roldanas.`
+    },
+    {
+      q: `Posso fixar painéis de vidro diretamente no gesso cartonado (Drywall)?`,
+      a: `Sim, contanto que haja perfis de aço estrutural ou reforços de madeira por trás do gesso para suportar a carga de tração das ferragens. Nossos técnicos sempre realizam um teste de prumo e resistência física na parede antes da montagem final.`
+    },
+    {
+      q: `Quais cores e espessuras estão disponíveis para os vidros temperados?`,
+      a: `Disponibilizamos vidros de 6mm, 8mm, 10mm e 12mm de espessura. Em termos de cores, você pode optar pelo clássico incolor, verde, bronze, fumê (cinza escuro), satinato (jateado opaco) ou acidado, adaptando o nível de privacidade e estética.`
+    },
+    {
+      q: `O vidro temperado pode ser recortado ou furado na hora da montagem?`,
+      a: `Não. Após passar pelo forno de têmpera, qualquer tentativa de corte, furo ou desgaste no vidro temperado causará a quebra instantânea e total da peça. Por isso, as medições técnicas iniciais da nossa equipe são absolutamente precisas e definitivas.`
+    }
+  ]
+];
+
+// Service descriptions for tabs (palavra-chave + resumo do serviço)
+const serviceSummaries: Record<string, string> = {
+  'box-para-banheiro': '- Box de Vidro 8mm',
+  'cobertura-de-vidro': '- Teto e Pergolado',
+  'conserto-box': '- Conserto Rápido',
+  'cortina-de-vidro': '- Sacada Retrátil',
+  'divisorias-de-vidro': '- Divisória de Vidro',
+  'envidracamento-sacada': '- Sacadas Retráteis',
+  'espelho-sob-medida': '- Espelho Lapidado',
+  'fechamento-varanda': '- Proteção de Varanda',
+  'guarda-corpo': '- Guarda-Corpo Inox',
+  'manutencao-cortina-vidro': '- Conserto de Sacada',
+  'manutencao-esquadrias': '- Conserto de Janela',
+  'manutencao-sacadas': '- Ajuste de Sacada',
+  'muro-de-vidro': '- Fachada e Muro',
+  'porta-de-vidro': '- Porta de Vidro',
+  'vidros-sob-medida': '- Vidros Especiais'
+};
+
+// Combine copy elements dynamically to generate unique paragraphs
+const introText = introSecTemplates[combineIndex % introSecTemplates.length];
+const firstParagraph = `${keyword} ${introText}`;
+const stepText = stepSecTemplates[(combineIndex + 1) % stepSecTemplates.length];
+const appsText = appsSecTemplates[(combineIndex + 2) % appsSecTemplates.length];
+const maintText = maintSecTemplates[(combineIndex + 3) % maintSecTemplates.length];
+const faqs = faqSecTemplates[combineIndex % faqSecTemplates.length];
+
+const shortSummary = serviceSummaries[service.slug] || '';
+const title = `${keyword} ${shortSummary}`;
+const description = `${keyword}. Instalação técnica de alto padrão, vidro temperado certificado e garantia ABNT. Orçamento rápido pelo WhatsApp na sua região.`;
+
+// Layout Structure Configurations based on index (respecting original color tokens)
+const layoutConfigs = [
+  {
+    layoutName: 'Sidebar Right',
+    heroBg: 'bg-gray-50 border-b border-gray-100',
+    sidebarOrder: 'lg:col-span-1 lg:order-last',
+    contentOrder: 'lg:col-span-2 lg:order-first',
+    cardHighlightBg: 'bg-accent text-white group hover:bg-secondary transition-colors duration-500',
+    cardHighlightText: 'text-primary',
+    sidebarCardBg: 'bg-secondary p-12 text-white shadow-2xl shadow-secondary/40 relative group overflow-hidden',
+    sidebarBtnClass: 'block w-full bg-primary text-secondary font-black p-8 text-center uppercase tracking-widest text-xs hover:scale-105 active:scale-95 transition-all'
+  },
+  {
+    layoutName: 'Sidebar Left',
+    heroBg: 'bg-white border-b border-gray-100',
+    sidebarOrder: 'lg:col-span-1 lg:order-first',
+    contentOrder: 'lg:col-span-2 lg:order-last',
+    cardHighlightBg: 'bg-primary text-secondary',
+    cardHighlightText: 'text-secondary/70',
+    sidebarCardBg: 'bg-accent p-12 text-white shadow-2xl relative group overflow-hidden border-t-8 border-primary',
+    sidebarBtnClass: 'block w-full bg-primary text-secondary font-black p-8 text-center uppercase tracking-widest text-xs hover:scale-105 active:scale-95 transition-all'
+  },
+  {
+    layoutName: 'Full Width Centered Content',
+    heroBg: 'bg-gray-50 border-b border-gray-100',
+    sidebarOrder: 'lg:col-span-3 lg:order-last mt-16',
+    contentOrder: 'lg:col-span-3',
+    cardHighlightBg: 'bg-secondary text-white',
+    cardHighlightText: 'text-primary',
+    sidebarCardBg: 'bg-accent p-12 text-white shadow-2xl max-w-2xl mx-auto border-l-8 border-primary',
+    sidebarBtnClass: 'block w-full bg-primary text-secondary font-black p-8 text-center uppercase tracking-widest text-xs hover:scale-105 active:scale-95 transition-all'
+  }
+];
+
+const layout = layoutConfigs[combineIndex % 3];
 ---
 
 <Layout 
-  title={`${localizedTitle.split(' em Porto Alegre')[0]} | Porto Alegre`}
-  description={localizedDescription}
+  title={title}
+  description={description}
 >
   <!-- Service Hero -->
-  <section class="py-24 md:py-32 bg-gray-50 border-b border-gray-100">
+  <section class={`py-24 md:py-32 ${layout.heroBg}`}>
     <div class="container mx-auto px-6 md:px-12">
       <div class="max-w-4xl">
         <a href={`/bairros/${bairro.slug}`} class="text-secondary font-black uppercase tracking-[0.2em] text-[10px] mb-12 inline-block hover:text-primary hover:-translate-x-2 transition-all">
           &larr; Voltar para {bairro.name}
         </a>
-        <h1 class="text-4xl md:text-6xl font-black mb-10 tracking-tighter leading-tight uppercase text-gray-900">{localizedTitle}</h1>
-        <p class="text-lg md:text-2xl text-gray-600 leading-relaxed font-medium italic border-l-8 border-primary pl-8">{localizedDescription}</p>
+        <h1 class="text-4xl md:text-6xl font-black mb-10 tracking-tighter leading-tight uppercase text-gray-900">
+          {keyword}
+        </h1>
+        <p class="text-lg md:text-2xl text-gray-600 leading-loose font-medium italic border-l-8 border-primary pl-8">
+          {firstParagraph}
+        </p>
       </div>
     </div>
   </section>
 
+  <!-- Main Content Layout Section -->
   <section class="py-24 md:py-32 bg-white">
     <div class="container mx-auto px-6 md:px-12">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-24">
         
-        <!-- Main Content -->
-        <div class="lg:col-span-2">
+        <!-- Main Content Column -->
+        <div class={layout.contentOrder}>
           <div class="mb-24">
-            <h2 class="text-2xl font-black mb-12 uppercase tracking-[0.2em] text-secondary">Detalhes do Serviço em {bairro.name}</h2>
-            <article class="prose prose-lg prose-slate max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-p:leading-relaxed prose-p:mb-12 prose-strong:text-secondary">
-              <LocalizedContent bairroName={bairro.name}>
-                <Content />
-              </LocalizedContent>
+            <h2 class="text-2xl font-black mb-12 uppercase tracking-[0.1em] text-secondary">
+              {keyword}: Detalhes do Serviço
+            </h2>
+            
+            <!-- Spacings (leading-loose and paragraph spacing mb-12) updated to give text "more breathing room" -->
+            <article class="max-w-none text-gray-600 leading-loose">
+              
+              <!-- Markdown Content localized -->
+              <div class="mb-12 border-b border-gray-100 pb-12">
+                <LocalizedContent bairroName={bairro.name}>
+                  <Content />
+                </LocalizedContent>
+              </div>
+
+              <!-- Extra generated sections (dynamic paragraphs) to build word count (using set:html to render strong tags) -->
+              <div class="space-y-16">
+                <div>
+                  <h3 class="text-2xl font-black text-gray-900 mb-6 uppercase tracking-tight">Processo de Execução Técnica</h3>
+                  <div class="whitespace-pre-line leading-loose text-gray-600 mb-12" set:html={stepText}></div>
+                </div>
+
+                <div>
+                  <h3 class="text-2xl font-black text-gray-900 mb-6 uppercase tracking-tight">Aplicações e Resolução de Problemas</h3>
+                  <p class="leading-loose text-gray-600 mb-12">{appsText}</p>
+                </div>
+
+                <div>
+                  <h3 class="text-2xl font-black text-gray-900 mb-6 uppercase tracking-tight">Manutenção Preventiva e Conservação</h3>
+                  <div class="whitespace-pre-line leading-loose text-gray-600 mb-12" set:html={maintText}></div>
+                </div>
+              </div>
             </article>
           </div>
 
+          <!-- Feature boxes -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div class="p-12 bg-accent text-white group hover:bg-secondary transition-colors duration-500">
-              <h3 class="font-black mb-8 uppercase tracking-widest text-xs text-primary">Vantagens para {bairro.name}</h3>
+            <div class={`p-12 ${layout.cardHighlightBg}`}>
+              <h3 class={`font-black mb-8 uppercase tracking-widest text-xs ${layout.cardHighlightText}`}>Vantagens para {bairro.name}</h3>
               <ul class="space-y-5 text-sm font-bold">
-                <li class="flex items-center gap-4"><span class="text-primary">▶</span> Atendimento Rápido na Região</li>
-                <li class="flex items-center gap-4"><span class="text-primary">▶</span> Durabilidade Premium</li>
-                <li class="flex items-center gap-4"><span class="text-primary">▶</span> Segurança ABNT Certificada</li>
+                <li class="flex items-center gap-4"><span>▶</span> Atendimento Rápido Local</li>
+                <li class="flex items-center gap-4"><span>▶</span> Durabilidade Premium</li>
+                <li class="flex items-center gap-4"><span>▶</span> Segurança ABNT Certificada</li>
               </ul>
             </div>
             <div class="p-12 bg-primary text-secondary">
@@ -79,18 +285,31 @@ const localizedDescription = service.data.description.replace(/Porto Alegre/g, `
               </ul>
             </div>
           </div>
+
+          <!-- FAQ Accordion section -->
+          <div class="mt-24 border-t border-gray-100 pt-16">
+            <h3 class="text-2xl font-black text-gray-900 uppercase tracking-tighter mb-12">Perguntas Frequentes (FAQ)</h3>
+            <div class="space-y-12">
+              {faqs.map(faq => (
+                <div class="border-b border-gray-100 pb-10">
+                  <h4 class="text-lg font-bold text-gray-900 mb-4">{faq.q}</h4>
+                  <p class="text-gray-600 text-sm leading-loose">{faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <!-- Sticky CTA Sidebar -->
-        <div class="lg:col-span-1">
+        <!-- Sticky CTA Sidebar / Banner Column -->
+        <div class={layout.sidebarOrder}>
           <div class="sticky top-32 space-y-10">
-            <div class="bg-secondary p-12 text-white shadow-2xl shadow-secondary/40 relative group overflow-hidden">
+            <div class={layout.sidebarCardBg}>
               <div class="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
               <div class="relative z-10">
                 <h3 class="text-3xl font-black mb-8 uppercase leading-tight tracking-tighter text-primary">Orçamento em {bairro.name}</h3>
-                <p class="text-blue-50 mb-12 text-base leading-relaxed font-medium">Fale agora com nosso técnico e peça seu orçamento para {localizedTitle}.</p>
+                <p class="text-blue-50 mb-12 text-sm leading-relaxed font-medium">Solicite sua cotação sem compromisso para {serviceName} com atendimento rápido.</p>
                 <div class="space-y-5">
-                  <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento para ${localizedTitle}.`)}`} class="block w-full bg-primary text-secondary font-black p-8 text-center uppercase tracking-widest text-xs hover:scale-105 active:scale-95 transition-all">
+                  <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento para ${keyword}.`)}`} class={layout.sidebarBtnClass}>
                     Chamar no Whatsapp
                   </a>
                 </div>
@@ -103,6 +322,7 @@ const localizedDescription = service.data.description.replace(/Porto Alegre/g, `
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>

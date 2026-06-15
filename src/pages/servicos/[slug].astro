@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-const description = `Especialista em ${entry.data.title} em Porto Alegre. Acabamento premium e segurança garantida para seu projeto local.`;
+const description = `Especialista em ${entry.data.title.replace(" em Porto Alegre", "")} em Porto Alegre. Acabamento premium e segurança garantida para seu projeto local.`;
 ---
 
 <Layout 

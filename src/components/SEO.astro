@@ -15,9 +15,10 @@ const canonicalURL = Astro.props.canonicalURL || new URL(Astro.url.pathname, Ast
 
 
 // Normalização da URL canônica (remover barra final se existir, exceto na home)
-const canonical = canonicalURL.replace(/\/$/, "");
+const isHome = Astro.url.pathname === '/';
+const canonical = isHome ? canonicalURL : canonicalURL.replace(/\/$/, "");
 
-const fullTitle = title === SITE_CONFIG.name ? title : `${title} | ${SITE_CONFIG.name}`;
+const fullTitle = title;
 ---
 
 <!-- Global Metadata -->

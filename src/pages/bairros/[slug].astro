@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { SITE_CONFIG } from '../../data/config';
 import { BAIRROS } from '../../data/bairros';
+import ServiceIcon from '../../components/ServiceIcon.astro';
 
 export async function getStaticPaths() {
   return BAIRROS.map(bairro => ({
@@ -14,58 +15,178 @@ export async function getStaticPaths() {
 const { bairro } = Astro.props;
 const services = await getCollection('servicos');
 
-// Dynamic content generation to avoid duplicate text
-const templates = [
-  `Atendemos toda a região de ${bairro.name} com excelência em vidros e espelhos. Nossa equipe técnica está preparada para realizar medições precisas e instalações limpas, garantindo que sua obra ou reforma no bairro ${bairro.name} tenha o acabamento premium que você procura. Seja para residências ou estabelecimentos comerciais, somos a vidraçaria em Porto Alegre que entrega qualidade e pontualidade.`,
-  `Procurando por uma vidraçaria em ${bairro.name}? A Vidro Essencial Porto Alegre oferece soluções sob medida para todos os tipos de projetos em vidro. No bairro ${bairro.name}, destacamo-nos pelo atendimento ágil e pela utilização de materiais certificados, seguindo rigorosamente as normas de segurança. Transforme seu ambiente com a sofisticação que apenas os melhores vidros podem proporcionar.`,
-  `A Vidro Essencial é referência técnica no bairro ${bairro.name} em Porto Alegre. Nossa especialidade envolve desde o clássico box de banheiro até complexos sistemas de envidraçamento de sacadas. Atendendo moradores e empresas de ${bairro.name}, focamos na satisfação total do cliente, oferecendo orçamentos justos e execução técnica milimétrica em cada detalhe do seu projeto.`,
-  `Se você reside em ${bairro.name} ou possui um negócio na região, sabe que a segurança e o design são fundamentais. Nossa vidraçaria em Porto Alegre atua fortemente em ${bairro.name}, trazendo o que há de mais moderno em espelhos, coberturas e portas de vidro. Garantimos um suporte pós-venda especializado e a tranquilidade de contratar uma empresa líder no setor.`
+const keyword = `Vidraçaria ${bairro.prep} ${bairro.name} Porto Alegre`;
+
+// Dynamic content generation to avoid duplicate text (SEO unique copy pool)
+const introTemplates = [
+  `oferece atendimento técnico diferenciado e ágil para residências, escritórios e condomínios. Nossa equipe realiza a medição precisa no local e executa a instalação de vidros com acabamento impecável, seguindo rigorosamente as normas de segurança da ABNT.`,
+  `dispõe de soluções sob medida que aliam design moderno e alta durabilidade. Desde projetos residenciais personalizados até instalações comerciais robustas, garantimos produtos certificados e mão de obra altamente qualificada.`,
+  `é referência em serviços de vidraçaria de alto padrão. Atendemos arquitetos, construtores e proprietários com projetos sob medida de box, espelhos e fechamento de áreas com rapidez e eficiência.`,
+  `traz modernidade e sofisticação para o seu imóvel. Desenvolvemos divisórias de vidro, tampos de mesa, espelhos lapidados e películas especiais com garantia de fábrica e suporte pós-venda garantido.`,
+  `busca a total satisfação do cliente em cada etapa da obra ou reforma. Realizamos orçamentos sem compromisso e oferecemos facilidades no pagamento para espelhos decorativos, box de blindex e esquadrias de vidro.`,
+  `conta com uma equipe de vidraceiros experientes e ferramentas modernas para garantir cortes perfeitos e instalações limpas. Focamos no detalhe técnico para entregar segurança e valorização para o seu imóvel.`,
+  `oferece um portfólio completo de vidros temperados, laminados, jateados e espelhos de diversas espessuras. Nosso diferencial é a pontualidade na entrega e o atendimento humanizado.`,
+  `realiza a manutenção, vedação e conserto de box de banheiro e sacadas de vidro com peças originais e garantia de durabilidade. Proteja sua família com serviços executados por técnicos credenciados.`
+];
+
+const seoHeadings = [
+  `${keyword}: Por que escolher nossa empresa?`,
+  `${keyword}: Excelência e Compromisso`,
+  `${keyword}: Soluções Sob Medida em Vidro`,
+  `${keyword}: Vidraceiros Prontos para Atender`,
+  `${keyword}: Projetos Residenciais e Comerciais`,
+  `${keyword}: Segurança e Certificação ABNT`
+];
+
+const seoTexts = [
+  `Nossa empresa é líder regional no setor de vidros por oferecer um serviço ágil e seguro. Trabalhamos exclusivamente com marcas consagradas de vidro temperado e laminado, assegurando que o box do seu banheiro ou a sacada do seu apartamento resistam ao tempo e a impactos. Nossos técnicos passam por treinamentos periódicos para garantir uma instalação limpa, precisa e silenciosa.`,
+  `Valorizar o seu espaço com elegância é o nosso propósito. Os espelhos sob medida que instalamos são lapidados com tecnologia avançada para evitar a distorção da imagem e possuem película protetora contra oxidação. Além disso, nossas divisórias e portas de vidro ajudam a otimizar a iluminação natural dos ambientes comerciais e residenciais com sofisticação.`,
+  `A segurança de sua família ou de seus clientes é prioridade. Todos os nossos projetos de guarda-corpo, muros de vidro e fechamento de sacadas são calculados de acordo com a pressão do vento e as normas técnicas vigentes. Utilizamos ferragens e acessórios em alumínio ou aço inox de alta resistência para prevenir desgastes e garantir um funcionamento suave.`,
+  `Facilidade na comunicação e orçamento rápido são pilares do nosso atendimento local. Entendemos que reformas exigem agilidade, por isso disponibilizamos técnicos na região para realizar visitas de avaliação e esclarecer todas as dúvidas sobre vidros acústicos, box de correr, espelhos bisotados e películas de privacidade.`,
+  `A escolha do vidro correto faz toda a diferença no conforto térmico e acústico do seu ambiente. Auxiliamos você a escolher a melhor espessura e tipo de vidro para janelas, portas e coberturas, reduzindo ruídos externos e controlando a entrada de calor. Nosso pós-venda está sempre ativo para prestar qualquer suporte ou manutenção.`,
+  `Realizamos reformas completas de vidros antigos, troca de roldanas de box, regulagem de portas de vidro temperado e vedação contra infiltrações em sacadas. Usamos silicones selantes de cura neutra e alta performance para evitar mofo e vazamentos, prolongando a vida útil de todas as suas instalações.`
 ];
 
 const bIndex = BAIRROS.findIndex(b => b.slug === bairro.slug);
-const introText = templates[bIndex % templates.length];
-const description = `Vidraçaria em ${bairro.name} Porto Alegre. Box de banheiro, espelhos e envidraçamento de sacadas com atendimento ágil e acabamento de elite no bairro ${bairro.name}.`;
+
+// Combinatorics for text
+const introText = introTemplates[bIndex % introTemplates.length];
+const firstParagraph = `${keyword} ${introText}`;
+const seoHeading = seoHeadings[(bIndex + 2) % seoHeadings.length];
+const seoText = seoTexts[(bIndex + 4) % seoTexts.length];
+const description = `${keyword}. Box de banheiro, espelhos sob medida, fechamento de sacadas e manutenção de vidros com atendimento ágil, garantia e acabamento profissional.`;
+
+// Layout styling parameters based on index (respecting original colors: primary=#FACC15, secondary=#1E3A8A, accent=#000000)
+const layoutStyles = [
+  {
+    heroBg: 'bg-white',
+    heroTextContainer: 'max-w-4xl',
+    heroH1Class: 'text-4xl md:text-7xl font-black leading-[1.1] mb-10 tracking-tighter text-gray-900 uppercase',
+    heroBtnClass: 'bg-secondary text-white font-black px-12 py-7 text-center hover:bg-primary hover:text-secondary hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-secondary/30 uppercase tracking-widest text-xs',
+    seoBg: 'bg-gray-50 border-y border-gray-100',
+    seoGridOrder: 'order-first md:order-none',
+    seoCardBorder: 'border-l-8 border-primary bg-white',
+    servicesBg: 'bg-white',
+    servicesCardBg: 'bg-gray-50 hover:bg-white hover:shadow-2xl border-b-4 border-transparent hover:border-primary',
+    ctaBg: 'bg-secondary text-white',
+    ctaBtnClass: 'inline-block bg-primary text-secondary font-black px-12 py-6 uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl shadow-primary/20'
+  },
+  {
+    heroBg: 'bg-gray-50 border-b border-gray-100',
+    heroTextContainer: 'max-w-4xl mx-auto text-center',
+    heroH1Class: 'text-4xl md:text-6xl font-black leading-[1.1] mb-10 tracking-tighter text-gray-900 uppercase',
+    heroBtnClass: 'bg-secondary text-white font-black px-12 py-7 text-center hover:bg-primary hover:text-secondary hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-secondary/30 uppercase tracking-widest text-xs inline-block',
+    seoBg: 'bg-white',
+    seoGridOrder: 'order-last',
+    seoCardBorder: 'border-t-8 border-secondary bg-gray-50',
+    servicesBg: 'bg-gray-50',
+    servicesCardBg: 'bg-white hover:bg-white hover:shadow-2xl border-b-4 border-transparent hover:border-secondary',
+    ctaBg: 'bg-secondary text-white',
+    ctaBtnClass: 'inline-block bg-primary text-secondary font-black px-12 py-6 uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl shadow-primary/20'
+  },
+  {
+    heroBg: 'bg-white',
+    heroTextContainer: 'max-w-5xl flex flex-col md:flex-row gap-12 items-center',
+    heroH1Class: 'text-4xl md:text-6xl font-black leading-[1.1] mb-8 tracking-tighter text-gray-900 uppercase',
+    heroBtnClass: 'bg-secondary text-white font-black px-12 py-7 text-center hover:bg-primary hover:text-secondary hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-secondary/30 uppercase tracking-widest text-xs',
+    seoBg: 'bg-gray-50 border-y border-gray-100',
+    seoGridOrder: 'order-first',
+    seoCardBorder: 'border-l-8 border-secondary bg-white',
+    servicesBg: 'bg-white',
+    servicesCardBg: 'bg-gray-50 hover:bg-white hover:shadow-2xl border-b-4 border-transparent hover:border-secondary',
+    ctaBg: 'bg-secondary text-white',
+    ctaBtnClass: 'inline-block bg-primary text-secondary font-black px-12 py-6 uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl shadow-primary/20'
+  },
+  {
+    heroBg: 'bg-secondary text-white py-32',
+    heroTextContainer: 'max-w-4xl',
+    heroH1Class: 'text-4xl md:text-7xl font-black leading-[1.1] mb-10 tracking-tighter text-primary uppercase',
+    heroBtnClass: 'bg-primary text-secondary font-black px-12 py-7 text-center hover:bg-white hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-primary/30 uppercase tracking-widest text-xs',
+    seoBg: 'bg-white',
+    seoGridOrder: 'order-none',
+    seoCardBorder: 'border-l-8 border-primary bg-gray-50',
+    servicesBg: 'bg-gray-50',
+    servicesCardBg: 'bg-white hover:bg-white hover:shadow-2xl border-b-4 border-transparent hover:border-primary',
+    ctaBg: 'bg-secondary text-white',
+    ctaBtnClass: 'inline-block bg-primary text-secondary font-black px-12 py-6 uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl shadow-primary/20'
+  }
+];
+
+const style = layoutStyles[bIndex % layoutStyles.length];
 ---
 
 <Layout 
-  title={`${bairro.title.split(' em Porto Alegre')[0]} | Porto Alegre`}
+  title={keyword}
   description={description}
 >
   <!-- Hero Section -->
-  <section class="py-24 md:py-32 bg-white overflow-hidden">
+  <section class={`py-24 md:py-32 overflow-hidden ${style.heroBg}`}>
     <div class="container mx-auto px-6 md:px-12">
-      <div class="max-w-4xl">
-        <span class="inline-block bg-primary text-secondary font-black px-4 py-1 uppercase tracking-[0.2em] text-[10px] mb-8">
-          Atendimento Local em Porto Alegre
-        </span>
-        <h1 class="text-4xl md:text-7xl font-black leading-[1.1] mb-10 tracking-tighter text-gray-900 uppercase">
-          {bairro.title}
-        </h1>
-        <p class="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mb-12">
-          {introText}
-        </p>
-        <div class="flex flex-col sm:flex-row gap-6">
-          <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento.`)}`} class="bg-secondary text-white font-black px-12 py-7 text-center hover:bg-accent hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-secondary/30 uppercase tracking-widest text-xs">
-            Orçamento para {bairro.name}
-          </a>
-        </div>
+      <div class={style.heroTextContainer}>
+        {bIndex % 4 === 2 ? (
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="text-left">
+              <span class="inline-block bg-primary text-secondary font-black px-4 py-1 uppercase tracking-[0.2em] text-[10px] mb-8">
+                Atendimento Local em Porto Alegre
+              </span>
+              <h1 class={style.heroH1Class}>
+                {keyword}
+              </h1>
+              <p class="text-lg md:text-xl text-gray-600 leading-relaxed mb-12">
+                {firstParagraph}
+              </p>
+              <div class="flex flex-col sm:flex-row gap-6">
+                <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento.`)}`} class={style.heroBtnClass}>
+                  Orçamento para {bairro.name}
+                </a>
+              </div>
+            </div>
+            <div class="bg-gray-50 p-10 shadow-xl border-l-8 border-primary">
+              <h3 class="text-xl font-black mb-6 uppercase tracking-tight text-gray-900">Nossa Garantia Local</h3>
+              <ul class="space-y-4 font-bold text-gray-900 text-sm">
+                <li class="flex items-center gap-3"><span class="text-primary">✓</span> Projetos sob medida em {bairro.name}</li>
+                <li class="flex items-center gap-3"><span class="text-primary">✓</span> Instalação rápida e segura</li>
+                <li class="flex items-center gap-3"><span class="text-primary">✓</span> Equipe técnica especializada</li>
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <span class="inline-block bg-primary text-secondary font-black px-4 py-1 uppercase tracking-[0.2em] text-[10px] mb-8">
+              Atendimento Local em Porto Alegre
+            </span>
+            <h1 class={style.heroH1Class}>
+              {keyword}
+            </h1>
+            <p class={`text-lg md:text-xl leading-relaxed mb-12 max-w-2xl ${(style.heroBg.includes('bg-accent') || style.heroBg.includes('bg-secondary')) ? 'text-blue-100' : 'text-gray-600'} ${style.heroTextContainer.includes('text-center') ? 'mx-auto' : ''}`}>
+              {firstParagraph}
+            </p>
+            <div class={`flex flex-col sm:flex-row gap-6 ${style.heroTextContainer.includes('text-center') ? 'justify-center' : ''}`}>
+              <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento.`)}`} class={style.heroBtnClass}>
+                Orçamento para {bairro.name}
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   </section>
 
   <!-- Section de Conteúdo Adicional SEO -->
-  <section class="py-20 bg-gray-50 border-y border-gray-100">
+  <section class={`py-20 ${style.seoBg}`}>
     <div class="container mx-auto px-6 md:px-12">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        <div>
-          <h2 class="text-3xl font-black mb-8 uppercase tracking-tighter">Por que escolher nossa vidraçaria em {bairro.name}?</h2>
+        <div class={style.seoGridOrder}>
+          <h2 class="text-3xl font-black mb-8 uppercase tracking-tighter text-gray-900">
+            {seoHeading}
+          </h2>
           <div class="space-y-6 text-gray-600 leading-relaxed">
-            <p>Morar ou trabalhar em <strong>{bairro.name}</strong> exige soluções que unam praticidade e estética. Nossa equipe conhece bem as características das edificações de Porto Alegre, oferecendo vidros que proporcionam isolamento térmico e acústico superior.</p>
+            <p>{seoText}</p>
             <p>Seja para um projeto de box para banheiro, instalação de espelhos decorativos ou manutenção de sacadas, a Vidro Essencial é a escolha certa para quem não abre mão da segurança. Atendemos todos os logradouros de {bairro.name} com rapidez.</p>
           </div>
         </div>
-        <div class="bg-white p-10 shadow-xl border-l-8 border-primary">
-          <h3 class="text-xl font-black mb-6 uppercase tracking-tight">Diferenciais em {bairro.name}</h3>
+        <div class={`p-10 shadow-xl ${style.seoCardBorder}`}>
+          <h3 class="text-xl font-black mb-6 uppercase tracking-tight text-gray-900">Diferenciais em {bairro.name}</h3>
           <ul class="space-y-4 font-bold text-gray-900">
             <li class="flex items-center gap-3">
               <span class="text-primary text-xl">✓</span> Orçamento rápido para {bairro.name}
@@ -86,10 +207,10 @@ const description = `Vidraçaria em ${bairro.name} Porto Alegre. Box de banheiro
   </section>
 
   <!-- Nossos Serviços no Bairro -->
-  <section class="py-24 bg-white">
+  <section class={`py-24 ${style.servicesBg}`}>
     <div class="container mx-auto px-6 md:px-12">
       <div class="text-center max-w-3xl mx-auto mb-20">
-        <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tighter uppercase">Nossos Serviços em {bairro.name}</h2>
+        <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tighter uppercase text-gray-900">Nossos Serviços em {bairro.name}</h2>
         <p class="text-lg text-gray-600 font-medium">Confira nossa gama completa de soluções em vidro para sua residência ou empresa em {bairro.name}.</p>
       </div>
 
@@ -98,8 +219,9 @@ const description = `Vidraçaria em ${bairro.name} Porto Alegre. Box de banheiro
           const localizedTitle = service.data.title.replace(/Porto Alegre/g, `${bairro.name} em Porto Alegre`);
           const localizedDescription = service.data.description.replace(/Porto Alegre/g, `${bairro.name} em Porto Alegre`);
           return (
-            <a href={`/bairros/${bairro.slug}/${service.slug}`} class="group bg-gray-50 p-10 hover:bg-white hover:shadow-2xl transition-all border-b-4 border-transparent hover:border-primary">
-              <h3 class="text-xl font-black mb-4 uppercase group-hover:text-secondary transition-colors">{localizedTitle}</h3>
+            <a href={`/bairros/${bairro.slug}/${service.slug}`} class={`group p-10 hover:bg-white hover:shadow-2xl transition-all ${style.servicesCardBg}`}>
+              <ServiceIcon slug={service.slug} />
+              <h3 class="text-xl font-black mb-4 uppercase group-hover:text-secondary transition-colors text-gray-900">{localizedTitle}</h3>
               <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-2">{localizedDescription}</p>
               <span class="text-secondary font-black text-[10px] uppercase tracking-widest">Saber mais &rarr;</span>
             </a>
@@ -110,11 +232,11 @@ const description = `Vidraçaria em ${bairro.name} Porto Alegre. Box de banheiro
   </section>
 
   <!-- CTA Final -->
-  <section class="py-24 bg-accent text-white">
+  <section class={`py-24 ${style.ctaBg}`}>
     <div class="container mx-auto px-6 md:px-12 text-center">
       <h2 class="text-3xl md:text-5xl font-black mb-10 tracking-tighter uppercase text-primary">Precisa de um vidraceiro em {bairro.name}?</h2>
       <p class="text-lg mb-12 text-gray-300 max-w-2xl mx-auto">Solicite agora mesmo seu orçamento gratuito. Atendemos todo o bairro {bairro.name} com a maior agilidade de Porto Alegre.</p>
-      <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento.`)}`} class="inline-block bg-primary text-secondary font-black px-12 py-6 uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl shadow-primary/20">
+      <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento.`)}`} class={style.ctaBtnClass}>
         Falar no WhatsApp agora
       </a>
     </div>

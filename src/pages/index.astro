@@ -4,6 +4,16 @@ import { getCollection } from 'astro:content';
 import { SITE_CONFIG } from '../data/config';
 import { Image } from 'astro:assets';
 
+import ServiceIcon from '../components/ServiceIcon.astro';
+
+// Import local images for Astro automatic optimization (WebP compilation & compression)
+import vidroPremium from '../assets/vidro_premium.png';
+import sacadaMedicao from '../assets/sacada_medicao.png';
+import sacadaEstrutura from '../assets/sacada_estrutura.png';
+import sacadaVidros from '../assets/sacada_vidros.png';
+import sacadaVedacao from '../assets/sacada_vedacao.png';
+import sacadaFinalizada from '../assets/sacada_finalizada.png';
+
 const services = (await getCollection('servicos')).slice(0, 6);
 ---
 
@@ -19,7 +29,7 @@ const services = (await getCollection('servicos')).slice(0, 6);
 					Sua <span class="text-secondary underline decoration-primary decoration-[12px] underline-offset-[12px]">Vidraçaria em Porto Alegre</span> com acabamento de elite.
 				</h1>
 				<p class="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mb-12">
-					A {SITE_CONFIG.name} é a melhor opção de vidraçaria em Porto Alegre para quem busca box de banheiro, espelhos e fechamento de sacadas premium. Projetos exclusivos com precisão técnica milimétrica.
+					A {SITE_CONFIG.name} é a melhor opção de vidraçaria em Porto Alegre para quem busca box de banheiro, espelhos e fechamento de sacadas premium. Se você está buscando uma <strong>vidraçaria mais próxima</strong>, conte com nossos <strong>Serviços de Vidraçaria em Porto Alegre‑RS Perto de Mim</strong> com precisão técnica milimétrica.
 				</p>
 				<div class="flex flex-col sm:flex-row gap-6">
 					<a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(SITE_CONFIG.contact.message)}`} class="bg-secondary text-white font-black px-12 py-7 text-center hover:bg-accent hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-secondary/30 uppercase tracking-widest text-xs">
@@ -69,12 +79,14 @@ const services = (await getCollection('servicos')).slice(0, 6);
 					</a>
 				</div>
 				<div class="grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl overflow-hidden group">
-					<img 
-						src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop" 
+					<Image 
+						src={vidroPremium} 
 						alt="Instalação de Vidro Premium" 
 						class="group-hover:scale-110 transition-transform duration-[2000ms] w-full h-full object-cover" 
-						width="800" 
-						height="600"
+						width={800} 
+						height={600}
+						format="webp"
+						quality={80}
 						loading="lazy"
 					/>
 				</div>
@@ -99,6 +111,7 @@ const services = (await getCollection('servicos')).slice(0, 6);
 				{services.map(service => (
 					<a href={`/servicos/${service.slug}`} class="group bg-white p-12 shadow-sm hover:shadow-2xl transition-all border-l-[12px] border-gray-100 hover:border-primary flex flex-col justify-between">
 						<div>
+							<ServiceIcon slug={service.slug} />
 							<h3 class="text-2xl font-black mb-6 uppercase group-hover:text-secondary transition-colors tracking-tight leading-none">{service.data.title}</h3>
 							<p class="text-gray-600 text-sm leading-relaxed mb-8 line-clamp-3 font-medium">{service.data.description}</p>
 						</div>
@@ -112,7 +125,14 @@ const services = (await getCollection('servicos')).slice(0, 6);
 	<!-- Depoimentos -->
 	<section class="py-24 md:py-32 bg-white">
 		<div class="container mx-auto px-6 md:px-12">
-			<h2 class="text-4xl md:text-6xl font-black mb-24 text-center uppercase tracking-tighter">Quem Escolhe a Excelência</h2>
+			<div class="text-center mb-20">
+				<span class="inline-block bg-primary text-secondary font-black px-4 py-1 uppercase tracking-[0.2em] text-[10px] mb-8">
+					Depoimentos de Clientes
+				</span>
+				<h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter text-gray-900">
+					Quem Escolhe a Excelência
+				</h2>
+			</div>
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
 				{[1, 2, 3].map((_, i) => (
 					<div class="p-12 bg-gray-50 relative group hover:bg-secondary transition-colors duration-500">
@@ -142,6 +162,110 @@ const services = (await getCollection('servicos')).slice(0, 6);
 		</div>
 	</section>
 
+	<!-- Serviços Realizados -->
+	<section class="py-24 md:py-32 bg-secondary text-white relative overflow-hidden border-t border-blue-900">
+		<div class="container mx-auto px-6 md:px-12 relative z-10">
+			<div class="text-center mb-20">
+				<span class="inline-block bg-primary text-secondary font-black px-4 py-1 uppercase tracking-[0.2em] text-[10px] mb-8">
+					Portfólio de Obras
+				</span>
+				<h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6 text-white">
+					Serviços de Envidraçamento de Sacadas realizados em Porto Alegre-RS
+				</h2>
+				<p class="text-lg text-blue-100 max-w-2xl mx-auto font-light">
+					Confira alguns dos nossos serviços de envidraçamento de sacadas em Porto Alegre-RS.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+				<!-- Card 1 (Grande) -->
+				<div class="relative overflow-hidden group shadow-2xl rounded-xl md:col-span-2 aspect-[16/10]">
+					<Image 
+						src={sacadaMedicao} 
+						alt="Medição a laser e planejamento estrutural de sacada" 
+						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+						width={800}
+						height={500}
+						format="webp"
+						quality={80}
+						loading="lazy"
+					/>
+					<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex items-end p-6 md:p-8">
+						<p class="text-white font-bold text-lg md:text-xl tracking-tight">Medição a laser e planejamento estrutural</p>
+					</div>
+				</div>
+
+				<!-- Card 2 -->
+				<div class="relative overflow-hidden group shadow-2xl rounded-xl md:col-span-1 aspect-[16/10] md:aspect-auto">
+					<Image 
+						src={sacadaEstrutura} 
+						alt="Instalação dos trilhos de alumínio" 
+						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+						width={800}
+						height={500}
+						format="webp"
+						quality={80}
+						loading="lazy"
+					/>
+					<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex items-end p-6">
+						<p class="text-white font-bold text-lg tracking-tight">Instalação dos trilhos de alumínio</p>
+					</div>
+				</div>
+
+				<!-- Card 3 -->
+				<div class="relative overflow-hidden group shadow-2xl rounded-xl aspect-[16/10]">
+					<Image 
+						src={sacadaVidros} 
+						alt="Fixação de vidros temperados com ventosas" 
+						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+						width={800}
+						height={500}
+						format="webp"
+						quality={80}
+						loading="lazy"
+					/>
+					<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex items-end p-6">
+						<p class="text-white font-bold text-lg tracking-tight">Fixação de vidros temperados com ventosas</p>
+					</div>
+				</div>
+
+				<!-- Card 4 -->
+				<div class="relative overflow-hidden group shadow-2xl rounded-xl aspect-[16/10]">
+					<Image 
+						src={sacadaVedacao} 
+						alt="Vedação de alta precisão com silicone premium" 
+						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+						width={800}
+						height={500}
+						format="webp"
+						quality={80}
+						loading="lazy"
+					/>
+					<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex items-end p-6">
+						<p class="text-white font-bold text-lg tracking-tight">Vedação de alta precisão com silicone premium</p>
+					</div>
+				</div>
+
+				<!-- Card 5 -->
+				<div class="relative overflow-hidden group shadow-2xl rounded-xl aspect-[16/10]">
+					<Image 
+						src={sacadaFinalizada} 
+						alt="Acabamento final e fechamento completo da sacada" 
+						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+						width={800}
+						height={500}
+						format="webp"
+						quality={80}
+						loading="lazy"
+					/>
+					<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex items-end p-6">
+						<p class="text-white font-bold text-lg tracking-tight">Acabamento final e fechamento completo da sacada</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- CTA Final -->
 	<section class="py-24 md:py-32 bg-secondary text-white relative overflow-hidden">
 		<div class="absolute inset-0 opacity-10 pointer-events-none">
@@ -157,5 +281,235 @@ const services = (await getCollection('servicos')).slice(0, 6);
 			</div>
 		</div>
 	</section>
+
+	<!-- FAQ Section -->
+	<section class="py-24 md:py-32 bg-gray-50 border-t border-gray-100">
+		<div class="container mx-auto px-6 md:px-12">
+			<div class="max-w-4xl mx-auto">
+				<div class="text-center mb-20">
+					<span class="inline-block bg-primary text-secondary font-black px-4 py-1 uppercase tracking-[0.2em] text-[10px] mb-8">
+						Dúvidas Comuns
+					</span>
+					<h2 class="text-3xl md:text-5xl font-black tracking-tighter uppercase text-gray-900 leading-tight">
+						Perguntas Frequentes Sobre Vidraçaria em Porto Alegre-RS
+					</h2>
+				</div>
+
+				<div class="space-y-6">
+					<!-- FAQ Item 1 -->
+					<div class="faq-item bg-white border border-gray-100 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all cursor-pointer">
+						<div class="faq-trigger flex justify-between items-center gap-4">
+							<h3 class="text-base md:text-lg font-bold text-gray-900 tracking-tight leading-snug">
+								Qual é o preço de uma vidraçaria em Porto Alegre-RS perto de mim?
+							</h3>
+							<span class="faq-icon-wrapper flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 text-secondary flex items-center justify-center font-bold text-lg transition-all duration-300">
+								+
+							</span>
+						</div>
+						<div class="faq-answer grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+							<div class="overflow-hidden text-gray-600 leading-loose text-sm md:text-base opacity-0 transition-opacity duration-300">
+								<p class="mt-4 pt-4 border-t border-gray-50">
+									O valor dos serviços de uma <strong>Vidraçaria em Porto Alegre-RS perto de mim</strong> varia de acordo com as especificidades do projeto, como o tipo de vidro (temperado, laminado ou acústico), espessura (8mm ou 10mm) e as ferragens utilizadas. Box de banheiro e espelhos lapidados possuem valores tabelados mais acessíveis, enquanto projetos sob medida como fechamento de sacadas e portas pivotantes dependem de visitas técnicas. Para obter o preço exato de uma <strong>Vidraçaria em Porto Alegre-RS perto de mim</strong>, entre em contato pelo WhatsApp e solicite uma estimativa detalhada sem compromisso.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- FAQ Item 2 -->
+					<div class="faq-item bg-white border border-gray-100 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all cursor-pointer">
+						<div class="faq-trigger flex justify-between items-center gap-4">
+							<h3 class="text-base md:text-lg font-bold text-gray-900 tracking-tight leading-snug">
+								Vocês fazem instalação em residências e comércios em Porto Alegre-RS?
+							</h3>
+							<span class="faq-icon-wrapper flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 text-secondary flex items-center justify-center font-bold text-lg transition-all duration-300">
+								+
+							</span>
+						</div>
+						<div class="faq-answer grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+							<div class="overflow-hidden text-gray-600 leading-loose text-sm md:text-base opacity-0 transition-opacity duration-300">
+								<p class="mt-4 pt-4 border-t border-gray-50">
+									Sim! A nossa <strong>Vidraçaria em Porto Alegre-RS</strong> conta com técnicos especializados tanto para instalações residenciais quanto para grandes projetos comerciais. Atendemos lojas, escritórios corporativos, condomínios e residências, instalando divisórias de vidro, fachadas em pele de vidro, portas de segurança e espelhos sob medida com rapidez, acabamento profissional e dentro das normas da ABNT.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- FAQ Item 3 -->
+					<div class="faq-item bg-white border border-gray-100 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all cursor-pointer">
+						<div class="faq-trigger flex justify-between items-center gap-4">
+							<h3 class="text-base md:text-lg font-bold text-gray-900 tracking-tight leading-snug">
+								Uma vidraçaria em Porto Alegre-RS próxima de mim fica mais barata?
+							</h3>
+							<span class="faq-icon-wrapper flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 text-secondary flex items-center justify-center font-bold text-lg transition-all duration-300">
+								+
+							</span>
+						</div>
+						<div class="faq-answer grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+							<div class="overflow-hidden text-gray-600 leading-loose text-sm md:text-base opacity-0 transition-opacity duration-300">
+								<p class="mt-4 pt-4 border-t border-gray-50">
+									Contratar uma <strong>Vidraçaria em Porto Alegre-RS próxima de mim</strong> costuma ser mais vantajoso e econômico. A proximidade geográfica reduz significativamente os custos de frete e deslocamento das equipes técnicas, além de permitir um atendimento pós-venda muito mais ágil. Além disso, uma <strong>Vidraçaria em Porto Alegre-RS próxima de mim</strong> consegue realizar a medição técnica e a entrega dos vidros temperados em prazos muito mais curtos, trazendo mais economia e praticidade para sua obra.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- FAQ Item 4 -->
+					<div class="faq-item bg-white border border-gray-100 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all cursor-pointer">
+						<div class="faq-trigger flex justify-between items-center gap-4">
+							<h3 class="text-base md:text-lg font-bold text-gray-900 tracking-tight leading-snug">
+								O serviço de medição é gratuito em Porto Alegre-RS?
+							</h3>
+							<span class="faq-icon-wrapper flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 text-secondary flex items-center justify-center font-bold text-lg transition-all duration-300">
+								+
+							</span>
+						</div>
+						<div class="faq-answer grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+							<div class="overflow-hidden text-gray-600 leading-loose text-sm md:text-base opacity-0 transition-opacity duration-300">
+								<p class="mt-4 pt-4 border-t border-gray-50">
+									Sim, na nossa <strong>Vidraçaria em Porto Alegre-RS</strong>, nós oferecemos a visita técnica e a medição com trena a laser de forma totalmente gratuita após um orçamento preliminar aprovado via WhatsApp. Isso garante precisão técnica absoluta para a fabricação dos vidros temperados sem nenhum custo extra de surpresa para você.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- FAQ Item 5 -->
+					<div class="faq-item bg-white border border-gray-100 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all cursor-pointer">
+						<div class="faq-trigger flex justify-between items-center gap-4">
+							<h3 class="text-base md:text-lg font-bold text-gray-900 tracking-tight leading-snug">
+								Como contratar uma boa vidraçaria em Porto Alegre-RS?
+							</h3>
+							<span class="faq-icon-wrapper flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 text-secondary flex items-center justify-center font-bold text-lg transition-all duration-300">
+								+
+							</span>
+						</div>
+						<div class="faq-answer grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+							<div class="overflow-hidden text-gray-600 leading-loose text-sm md:text-base opacity-0 transition-opacity duration-300">
+								<p class="mt-4 pt-4 border-t border-gray-50">
+									Para escolher uma excelente <strong>Vidraçaria em Porto Alegre-RS</strong>, é fundamental analisar três pontos cruciais: a reputação da empresa no mercado local, a conformidade de seus produtos com as normas técnicas de segurança da ABNT (especialmente a NBR 14698 para vidros temperados) e o portfólio de projetos já executados. Opte sempre por profissionais que ofereçam garantia assistida por escrito e atendimento transparente no suporte pós-venda.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- FAQ Item 6 -->
+					<div class="faq-item bg-white border border-gray-100 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all cursor-pointer">
+						<div class="faq-trigger flex justify-between items-center gap-4">
+							<h3 class="text-base md:text-lg font-bold text-gray-900 tracking-tight leading-snug">
+								Quanto tempo demora a instalação de um box ou porta em Porto Alegre-RS?
+							</h3>
+							<span class="faq-icon-wrapper flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 text-secondary flex items-center justify-center font-bold text-lg transition-all duration-300">
+								+
+							</span>
+						</div>
+						<div class="faq-answer grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+							<div class="overflow-hidden text-gray-600 leading-loose text-sm md:text-base opacity-0 transition-opacity duration-300">
+								<p class="mt-4 pt-4 border-t border-gray-50">
+									Para instalação de box padrão ou portas de vidro sob medida em Porto Alegre-RS, o prazo médio de fabricação do vidro temperado na têmpera é de 7 a 12 dias úteis. Após o vidro ficar pronto, nossa equipe técnica realiza a montagem e fixação no local em apenas poucas horas (geralmente entre 1 a 3 horas de trabalho), entregando o espaço limpo e pronto para o período de secagem do silicone.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- FAQ Item 7 -->
+					<div class="faq-item bg-white border border-gray-100 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all cursor-pointer">
+						<div class="faq-trigger flex justify-between items-center gap-4">
+							<h3 class="text-base md:text-lg font-bold text-gray-900 tracking-tight leading-snug">
+								Posso agendar a medição em Porto Alegre-RS?
+							</h3>
+							<span class="faq-icon-wrapper flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 text-secondary flex items-center justify-center font-bold text-lg transition-all duration-300">
+								+
+							</span>
+						</div>
+						<div class="faq-answer grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+							<div class="overflow-hidden text-gray-600 leading-loose text-sm md:text-base opacity-0 transition-opacity duration-300">
+								<p class="mt-4 pt-4 border-t border-gray-50">
+									Com certeza! Disponibilizamos horários flexíveis para agendar a medição técnica e a avaliação do seu projeto em Porto Alegre-RS de segunda a sexta-feira, em horários comerciais, adaptando-nos à sua disponibilidade para maior comodidade.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- FAQ Item 8 -->
+					<div class="faq-item bg-white border border-gray-100 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all cursor-pointer">
+						<div class="faq-trigger flex justify-between items-center gap-4">
+							<h3 class="text-base md:text-lg font-bold text-gray-900 tracking-tight leading-snug">
+								Quais métodos de pagamento são aceitos?
+							</h3>
+							<span class="faq-icon-wrapper flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 text-secondary flex items-center justify-center font-bold text-lg transition-all duration-300">
+								+
+							</span>
+						</div>
+						<div class="faq-answer grid grid-rows-[0fr] transition-all duration-300 overflow-hidden">
+							<div class="overflow-hidden text-gray-600 leading-loose text-sm md:text-base opacity-0 transition-opacity duration-300">
+								<p class="mt-4 pt-4 border-t border-gray-50">
+									Facilitamos o pagamento dos seus projetos de vidraçaria. Aceitamos cartões de crédito com parcelamento facilitado, transferências bancárias, PIX com descontos especiais para pagamentos à vista, além de faturamento direto para empresas e condomínios mediante aprovação de cadastro.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Google Maps Embed Section -->
+	<section class="py-16 bg-white border-t border-gray-100">
+		<div class="container mx-auto px-6 md:px-12">
+			<div class="max-w-4xl mx-auto bg-gray-50 p-4 rounded-2xl shadow-lg border border-gray-100">
+				<div class="w-full h-[350px] md:h-[400px] rounded-xl overflow-hidden">
+					<iframe 
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.2447958564177!2d-51.22026868846387!3d-30.029841874825907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95197906d4e8b3df%3A0xe54ef92c422c544d!2sRua%20Volunt%C3%A1rios%20da%20P%C3%A1tria%2C%20890%20-%20Centro%20Hist%C3%B3rico%2C%20Porto%20Alegre%20-%20RS%2C%2090030-001!5e0!3m2!1spt-BR!2sbr!4v1718469850000!5m2!1spt-BR!2sbr" 
+						width="100%" 
+						height="100%" 
+						style="border:0;" 
+						allowfullscreen="" 
+						loading="lazy" 
+						referrerpolicy="no-referrer-when-downgrade"
+						title="Nossa Localização em Porto Alegre - RS"
+					></iframe>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- FAQ Interactive Script -->
+	<script>
+		const faqItems = document.querySelectorAll('.faq-item');
+		faqItems.forEach(item => {
+			const trigger = item.querySelector('.faq-trigger');
+			const answer = item.querySelector('.faq-answer');
+			const inner = answer.querySelector('div');
+			const icon = item.querySelector('.faq-icon-wrapper');
+
+			trigger.addEventListener('click', () => {
+				const isOpen = answer.classList.contains('grid-rows-[1fr]');
+				
+				// Close all other FAQs to keep accordion look premium
+				faqItems.forEach(otherItem => {
+					const otherAnswer = otherItem.querySelector('.faq-answer');
+					const otherInner = otherAnswer.querySelector('div');
+					const otherIcon = otherItem.querySelector('.faq-icon-wrapper');
+					
+					otherAnswer.classList.remove('grid-rows-[1fr]');
+					otherAnswer.classList.add('grid-rows-[0fr]');
+					otherInner.classList.remove('opacity-100');
+					otherInner.classList.add('opacity-0');
+					otherIcon.textContent = '+';
+					otherIcon.classList.remove('bg-secondary', 'text-white', 'rotate-[135deg]');
+					otherIcon.classList.add('bg-blue-50', 'text-secondary');
+				});
+
+				if (!isOpen) {
+					answer.classList.remove('grid-rows-[0fr]');
+					answer.classList.add('grid-rows-[1fr]');
+					inner.classList.remove('opacity-0');
+					inner.classList.add('opacity-100');
+					icon.textContent = '×';
+					icon.classList.remove('bg-blue-50', 'text-secondary');
+					icon.classList.add('bg-secondary', 'text-white', 'rotate-[135deg]');
+				}
+			});
+		});
+	</script>
 </Layout>
 

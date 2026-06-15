@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vidroessencialportoalegre.com.br/sitemap.xml
+Sitemap: https://www.vidroessencialportoalegre.com.br/sitemap.xml

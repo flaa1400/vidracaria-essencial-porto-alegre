@@ -2,7 +2,7 @@
   "name": "vidracaria-porto-alegre",
   "version": "1.0.0",
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   },
   "type": "module",
   "scripts": {
@@ -10,7 +10,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "postinstall": "node scripts/patch-vercel-adapter.js"
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.1.0",

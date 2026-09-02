@@ -1,7 +1,7 @@
 export const SITE_CONFIG = {
   domain: 'https://vidroessencialportoalegre.com.br',
   name: 'Vidro Essencial',
-  tagline: 'Líder em Vidros e Espelhos de Alta Performance',
+  tagline: 'Vidraçaria em Porto Alegre | Líder em Vidros e Espelhos',
   description: 'Vidraçaria em Porto Alegre especializada em box de banheiro, espelhos sob medida e fechamento de sacadas. Acabamento premium e segurança garantida para seu projeto.',
   address: {
     street: 'Rua Voluntários da Pátria 890',
@@ -11,8 +11,8 @@ export const SITE_CONFIG = {
     country: 'Brasil'
   },
   contact: {
-    phone: '(11) 96429-9548',
-    whatsapp: '5511964299548',
+    phone: '(51) 9927-8590',
+    whatsapp: '555199278590',
     email: 'vidroessencialportoalegre@outlook.com',
     message: 'Olá vim do site, Vidro Essencial Porto Alegre, e gostaria de fazer um Orçamento'
   },

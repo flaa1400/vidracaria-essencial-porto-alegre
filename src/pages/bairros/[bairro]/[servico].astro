@@ -24,6 +24,10 @@ export async function getStaticPaths() {
 const { bairro, service } = Astro.props;
 const { Content } = await service.render();
 
+const isEsquadrias = service.slug === 'manutencao-esquadrias';
+const whatsapp = service.data.whatsapp || (isEsquadrias ? '555130412127' : SITE_CONFIG.contact.whatsapp);
+const phone = service.data.phone || (isEsquadrias ? '(51) 3041-2127' : SITE_CONFIG.contact.phone);
+
 const serviceName = service.data.title.replace(" em Porto Alegre", "");
 const keyword = `${serviceName} ${bairro.prep} ${bairro.name} Porto Alegre`;
 
@@ -206,6 +210,9 @@ const layout = layoutConfigs[combineIndex % 3];
 <Layout 
   title={title}
   description={description}
+  whatsapp={whatsapp}
+  phone={phone}
+  whatsappMessage={`Olá, estou em ${bairro.name} e gostaria de um orçamento para ${keyword}.`}
 >
   <!-- Service Hero -->
   <section class={`py-24 md:py-32 ${layout.heroBg}`}>
@@ -309,7 +316,7 @@ const layout = layoutConfigs[combineIndex % 3];
                 <h3 class="text-3xl font-black mb-8 uppercase leading-tight tracking-tighter text-primary">Orçamento em {bairro.name}</h3>
                 <p class="text-blue-50 mb-12 text-sm leading-relaxed font-medium">Solicite sua cotação sem compromisso para {serviceName} com atendimento rápido.</p>
                 <div class="space-y-5">
-                  <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento para ${keyword}.`)}`} class={layout.sidebarBtnClass}>
+                  <a href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento para ${keyword}.`)}`} class={layout.sidebarBtnClass}>
                     Chamar no Whatsapp
                   </a>
                 </div>

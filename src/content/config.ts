@@ -1,4 +1,4 @@
-﻿import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from 'astro:content';
 
 const servicos = defineCollection({
 	type: 'content',
@@ -6,6 +6,8 @@ const servicos = defineCollection({
 		title: z.string(),
 		description: z.string(),
 		icon: z.string().optional(),
+		whatsapp: z.string().optional(),
+		phone: z.string().optional(),
 	}),
 });
 

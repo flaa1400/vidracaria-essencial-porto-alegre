@@ -1,7 +1,17 @@
-﻿---
+---
 import { SITE_CONFIG } from '../data/config';
 
-const waLink = `https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(SITE_CONFIG.contact.message)}`;
+interface Props {
+  whatsapp?: string;
+  message?: string;
+}
+
+const { 
+  whatsapp = SITE_CONFIG.contact.whatsapp, 
+  message = SITE_CONFIG.contact.message 
+} = Astro.props;
+
+const waLink = `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
 ---
 
 <a 

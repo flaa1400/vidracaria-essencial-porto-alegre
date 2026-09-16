@@ -1,0 +1,241 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { CANOAS_CONFIG } from '../../data/canoas';
+import ServiceIcon from '../../components/ServiceIcon.astro';
+import CanoasContent from '../../components/CanoasContent.astro';
+
+export async function getStaticPaths() {
+  const serviceEntries = await getCollection('servicos');
+  return serviceEntries.map(service => ({
+    params: { servico: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const { Content } = await service.render();
+
+const allServices = await getCollection('servicos');
+const otherServices = allServices.filter(s => s.slug !== service.slug).slice(0, 6);
+
+const serviceCleanName = service.data.title.replace(" em Porto Alegre", "");
+const title = `${serviceCleanName} em Canoas - RS | Vidro Essencial`;
+const description = `Especialista em ${serviceCleanName} em Canoas - Rio Grande do Sul. Acabamento premium, vidros certificados ABNT e garantia. Solicite orçamento pelo WhatsApp: (51) 9927-8590.`;
+
+const phone = CANOAS_CONFIG.contact.phone;
+const whatsapp = CANOAS_CONFIG.contact.whatsapp;
+const whatsappMsg = `Olá, estou em Canoas e gostaria de um orçamento para ${serviceCleanName}.`;
+const waLink = `https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappMsg)}`;
+
+const faqs = [
+  {
+    q: `Como solicitar um orçamento de ${serviceCleanName} em Canoas?`,
+    a: `Basta clicar no botão do WhatsApp e nos enviar as dimensões aproximadas ou fotos do espaço pelo número (51) 9927-8590. Em seguida, nossa equipe agenda a visita técnica para a medição final no local em qualquer bairro de Canoas.`
+  },
+  {
+    q: `Qual o prazo de entrega e instalação para ${serviceCleanName} em Canoas?`,
+    a: `O prazo médio é de 7 a 15 dias úteis a partir da aprovação e medição técnica, assegurando o processo adequado de corte, têmpera e acabamento dos vidros.`
+  },
+  {
+    q: `O serviço de ${serviceCleanName} em Canoas tem garantia?`,
+    a: `Sim, todos os nossos serviços contam com garantia legal e técnica para os vidros e ferragens instaladas, garantindo total segurança e tranquilidade.`
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+};
+---
+
+<Layout 
+  title={title}
+  description={description}
+  phone={phone}
+  whatsapp={whatsapp}
+  whatsappMessage={whatsappMsg}
+  city="Canoas"
+  areaServed="Canoas, Rio Grande do Sul"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
+  <!-- Service Hero -->
+  <section class="py-20 md:py-28 bg-gray-50 border-b border-gray-100">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="max-w-4xl">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 mb-8">
+          <a href="/" class="hover:text-secondary transition-colors">Início</a>
+          <span>/</span>
+          <a href="/canoas" class="hover:text-secondary transition-colors">Canoas</a>
+          <span>/</span>
+          <span class="text-secondary">{serviceCleanName}</span>
+        </nav>
+
+        <span class="inline-block bg-primary text-secondary font-black px-4 py-1 uppercase tracking-[0.2em] text-[10px] mb-6">
+          Atendimento em Canoas - RS
+        </span>
+        <h1 class="text-4xl md:text-6xl font-black mb-8 tracking-tighter leading-tight uppercase text-gray-900">
+          {serviceCleanName} em Canoas - RS
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 leading-relaxed font-medium italic border-l-8 border-primary pl-6 mb-10">
+          {service.data.description.replace(/Porto Alegre/g, "Canoas - RS")}
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="bg-secondary text-white font-black px-10 py-5 text-center uppercase tracking-widest text-xs hover:bg-accent hover:scale-105 active:scale-95 transition-all shadow-xl shadow-secondary/20">
+            Pedir Orçamento: (51) 9927-8590
+          </a>
+          <a href="/canoas" class="bg-white border border-gray-200 text-gray-800 font-black px-8 py-5 text-center uppercase tracking-widest text-xs hover:bg-gray-50 transition-all">
+            &larr; Voltar para Canoas
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Section -->
+  <section class="py-24 bg-white">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 md:gap-24">
+        
+        <!-- Left: Service Details and Markdown Content -->
+        <div class="lg:col-span-2">
+          <div class="mb-16">
+            <h2 class="text-2xl font-black mb-8 uppercase tracking-[0.2em] text-secondary">
+              Especificações Técnicas do Serviço
+            </h2>
+            <CanoasContent>
+              <Content />
+            </CanoasContent>
+          </div>
+
+          <!-- Destaque Local Canoas -->
+          <div class="p-8 md:p-10 bg-gray-50 border-l-8 border-primary my-12">
+            <h3 class="text-xl font-black uppercase text-gray-900 mb-4">
+              Instalação de {serviceCleanName} em toda a cidade de Canoas
+            </h3>
+            <p class="text-gray-700 leading-relaxed text-sm mb-4">
+              Nossa equipe técnica atende projetos residenciais, condomínios e estabelecimentos comerciais em qualquer endereço de <strong>Canoas - Rio Grande do Sul</strong>. Realizamos a conferência milimétrica das medidas diretamente na obra para garantir corte sob medida, vedação adequada e funcionamento impecável.
+            </p>
+            <p class="text-gray-700 leading-relaxed text-sm">
+              Utilizamos insumos de padrão superior: vidros temperados ou laminados certificados, perfis de alumínio reforçados e ferragens antioxidantes em aço inox ou latão cromado.
+            </p>
+          </div>
+
+          <!-- Vantagens -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
+            <div class="p-8 bg-accent text-white group hover:bg-secondary transition-colors duration-300">
+              <h4 class="font-black mb-4 uppercase tracking-widest text-xs text-primary">Diferenciais Técnicos</h4>
+              <ul class="space-y-3 text-sm font-medium">
+                <li class="flex items-center gap-3"><span class="text-primary font-bold">✓</span> Vidro certificado ABNT</li>
+                <li class="flex items-center gap-3"><span class="text-primary font-bold">✓</span> Ferragens de alta durabilidade</li>
+                <li class="flex items-center gap-3"><span class="text-primary font-bold">✓</span> Vedação com silicone neutro premium</li>
+              </ul>
+            </div>
+            <div class="p-8 bg-gray-100 text-gray-900 group hover:bg-gray-200 transition-colors duration-300">
+              <h4 class="font-black mb-4 uppercase tracking-widest text-xs text-secondary">Atendimento em Canoas</h4>
+              <ul class="space-y-3 text-sm font-medium">
+                <li class="flex items-center gap-3"><span class="text-secondary font-bold">✓</span> Orçamento ágil via WhatsApp</li>
+                <li class="flex items-center gap-3"><span class="text-secondary font-bold">✓</span> Medição técnica no local</li>
+                <li class="flex items-center gap-3"><span class="text-secondary font-bold">✓</span> Garantia completa de instalação</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- FAQ do Serviço -->
+          <div class="mt-16">
+            <h3 class="text-2xl font-black mb-8 uppercase tracking-tight text-gray-900">Perguntas Frequentes sobre {serviceCleanName} em Canoas</h3>
+            <div class="space-y-6">
+              <div class="p-6 bg-gray-50 border border-gray-100 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">Como solicitar um orçamento de {serviceCleanName} em Canoas?</h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Basta clicar no botão do WhatsApp e nos enviar as dimensões aproximadas ou fotos do espaço pelo número <strong>(51) 9927-8590</strong>. Em seguida, nossa equipe agenda a visita técnica para a medição final no local.
+                </p>
+              </div>
+              <div class="p-6 bg-gray-50 border border-gray-100 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">Qual o prazo de entrega e instalação para Canoas?</h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  O prazo médio é de 7 a 15 dias úteis a partir da aprovação e medição técnica, assegurando o processo adequado de corte, têmpera e acabamento dos vidros.
+                </p>
+              </div>
+              <div class="p-6 bg-gray-50 border border-gray-100 rounded-lg">
+                <h4 class="font-bold text-gray-900 mb-2">O serviço de {serviceCleanName} tem garantia?</h4>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  Sim, todos os nossos serviços contam com garantia legal e técnica para os vidros e ferragens instaladas, garantindo a sua tranquilidade.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Sticky CTA Card and Other Canoas Services -->
+        <div class="lg:col-span-1">
+          <div class="sticky top-32 space-y-10">
+            <!-- Contact Card -->
+            <div class="bg-gray-50 p-8 border border-gray-200 rounded-xl shadow-lg">
+              <span class="text-xs font-black uppercase tracking-widest text-secondary block mb-2">Atendimento Direto</span>
+              <h3 class="text-2xl font-black uppercase text-gray-900 mb-4">Orçamento Rápido em Canoas</h3>
+              <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                Tire suas dúvidas ou agende sua medição para {serviceCleanName} diretamente com nossos técnicos.
+              </p>
+              <a href={waLink} target="_blank" rel="noopener noreferrer" class="block w-full bg-secondary text-white font-black text-center py-5 text-xs uppercase tracking-widest hover:bg-accent transition-all shadow-md mb-4">
+                Chamar no WhatsApp: (51) 9927-8590
+              </a>
+              <div class="text-center text-xs text-gray-500 font-bold uppercase tracking-wider">
+                Segunda a Sexta: 08h às 18h30
+              </div>
+            </div>
+
+            <!-- Other Services in Canoas -->
+            <div class="bg-white p-8 border border-gray-200 rounded-xl">
+              <h4 class="text-sm font-black uppercase tracking-widest text-gray-900 mb-6 border-b pb-4">
+                Outros Serviços em Canoas
+              </h4>
+              <div class="space-y-4">
+                {otherServices.map(other => {
+                  const cleanName = other.data.title.replace(/ em Porto Alegre/g, "");
+                  return (
+                    <a href={`/canoas/${other.slug}`} class="flex items-center gap-3 text-sm font-bold text-gray-700 hover:text-secondary group transition-colors">
+                      <span class="text-primary text-xs group-hover:translate-x-1 transition-transform">&rarr;</span>
+                      <span>{cleanName} em Canoas</span>
+                    </a>
+                  );
+                })}
+              </div>
+              <div class="mt-8 pt-4 border-t border-gray-100">
+                <a href="/canoas" class="text-xs font-black uppercase tracking-widest text-secondary hover:underline">
+                  Ver catálogo completo de Canoas &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Bottom -->
+  <section class="py-20 bg-secondary text-white text-center">
+    <div class="container mx-auto px-6 md:px-12">
+      <h2 class="text-3xl md:text-4xl font-black mb-6 uppercase text-primary tracking-tight">
+        Garanta o Melhor Acabamento em {serviceCleanName} para seu Imóvel
+      </h2>
+      <p class="text-base md:text-lg mb-10 text-gray-200 max-w-xl mx-auto">
+        Converse agora mesmo com nossa equipe e receba atendimento sob medida em Canoas - RS.
+      </p>
+      <a href={waLink} target="_blank" rel="noopener noreferrer" class="inline-block bg-primary text-secondary font-black px-10 py-5 text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-xl">
+        Falar no WhatsApp: (51) 9927-8590
+      </a>
+    </div>
+  </section>
+</Layout>

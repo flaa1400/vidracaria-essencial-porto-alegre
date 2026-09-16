@@ -1,0 +1,210 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { CANOAS_CONFIG } from '../../data/canoas';
+import ServiceIcon from '../../components/ServiceIcon.astro';
+
+const services = await getCollection('servicos');
+const waLink = `https://wa.me/${CANOAS_CONFIG.contact.whatsapp}?text=${encodeURIComponent(CANOAS_CONFIG.contact.message)}`;
+
+const faqs = [
+  {
+    q: "A Vidro Essencial atende em todos os bairros e regiões de Canoas?",
+    a: "Sim! Realizamos atendimento técnico, medições e instalações em toda a cidade de Canoas - RS com deslocamento ágil de nossa equipe."
+  },
+  {
+    q: "Qual o telefone de contato para Canoas?",
+    a: "Nosso canal direto para orçamentos e agendamentos em Canoas é o WhatsApp e telefone (51) 9927-8590. Você pode enviar fotos e medidas aproximadas para agilizar o retorno."
+  },
+  {
+    q: "Qual é o prazo médio de entrega para instalações em Canoas?",
+    a: "O prazo médio gira em torno de 7 a 15 dias úteis a partir da aprovação e medição final, respeitando o tempo de têmpera, lapidação e controle de qualidade do vidro."
+  },
+  {
+    q: "Os produtos instalados em Canoas contam com garantia?",
+    a: "Sim! Todos os serviços executados contam com garantia formal cobrindo defeitos de têmpera, funcionalidade dos componentes mecânicos e regulagem das ferragens."
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+};
+---
+
+<Layout 
+  title={CANOAS_CONFIG.title}
+  description={CANOAS_CONFIG.description}
+  phone={CANOAS_CONFIG.contact.phone}
+  whatsapp={CANOAS_CONFIG.contact.whatsapp}
+  whatsappMessage={CANOAS_CONFIG.contact.message}
+  city="Canoas"
+  areaServed="Canoas, Rio Grande do Sul"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
+  <!-- Hero Section -->
+  <section class="py-24 md:py-32 bg-white overflow-hidden">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="max-w-4xl">
+        <span class="inline-block bg-primary text-secondary font-black px-4 py-1 uppercase tracking-[0.2em] text-[10px] mb-8">
+          Atendimento Exclusivo em Canoas - RS
+        </span>
+        <h1 class="text-5xl md:text-7xl font-black leading-[1.1] mb-10 tracking-tighter text-gray-900 uppercase">
+          Sua <span class="text-secondary underline decoration-primary decoration-[12px] underline-offset-[12px]">Vidraçaria em Canoas</span> com acabamento de elite.
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mb-12">
+          A Vidro Essencial oferece atendimento técnico especializado para residências, condomínios e comércios em <strong>Canoas - Rio Grande do Sul</strong>. Box de banheiro, fechamento de sacadas, espelhos sob medida e vidros temperados com precisão milimétrica e garantia.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6">
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="bg-secondary text-white font-black px-12 py-7 text-center hover:bg-accent hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-secondary/30 uppercase tracking-widest text-xs">
+            Orçamento no WhatsApp: {CANOAS_CONFIG.contact.phone}
+          </a>
+          <a href="#servicos-canoas" class="bg-gray-100 text-gray-900 font-black px-12 py-7 text-center hover:bg-gray-200 hover:scale-105 active:scale-95 transition-all uppercase tracking-widest text-xs">
+            Nossos Serviços em Canoas
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diferenciais -->
+  <section class="py-24 md:py-32 bg-gray-50">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="p-12 bg-white border-b-8 border-primary shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all group">
+          <div class="text-5xl mb-8 group-hover:scale-110 transition-transform inline-block">⚡</div>
+          <h3 class="text-xl font-black mb-4 uppercase tracking-tight text-gray-900">Atendimento Ágil em Canoas</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Visita técnica rápida para medições precisas em qualquer ponto de Canoas, garantindo pontualidade na entrega da sua obra.</p>
+        </div>
+        <div class="p-12 bg-white border-b-8 border-secondary shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all group">
+          <div class="text-5xl mb-8 group-hover:scale-110 transition-transform inline-block">💎</div>
+          <h3 class="text-xl font-black mb-4 uppercase tracking-tight text-gray-900">Vidros Certificados ABNT</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Vidros temperados e laminados de procedência garantida, com alta resistência térmica, mecânica e total segurança para sua família.</p>
+        </div>
+        <div class="p-12 bg-white border-b-8 border-accent shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all group">
+          <div class="text-5xl mb-8 group-hover:scale-110 transition-transform inline-block">🛡️</div>
+          <h3 class="text-xl font-black mb-4 uppercase tracking-tight text-gray-900">Garantia & Acabamento Premium</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Ferragens de primeira linha em alumínio e inox, vedação duradoura com silicone de cura neutra e garantia integral de instalação.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid de Serviços em Canoas -->
+  <section id="servicos-canoas" class="py-24 md:py-32 bg-white">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <span class="text-secondary font-black tracking-widest text-xs uppercase mb-3 block">Catálogo Completo</span>
+        <h2 class="text-4xl md:text-5xl font-black tracking-tighter uppercase text-gray-900">Nossos Serviços em Canoas - RS</h2>
+        <p class="text-lg text-gray-600 font-medium mt-4">Soluções completas sob medida para projetos residenciais, comerciais e corporativos.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {services.map(service => {
+          const serviceCleanName = service.data.title.replace(/ em Porto Alegre/g, "");
+          const localizedTitle = `${serviceCleanName} em Canoas`;
+          const localizedDescription = service.data.description.replace(/Porto Alegre/g, "Canoas - RS");
+          return (
+            <a href={`/canoas/${service.slug}`} class="group p-10 bg-gray-50 border border-gray-100 hover:bg-white hover:shadow-2xl transition-all duration-300">
+              <ServiceIcon slug={service.slug} />
+              <h3 class="text-xl font-black mb-4 uppercase group-hover:text-secondary transition-colors text-gray-900">
+                {localizedTitle}
+              </h3>
+              <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
+                {localizedDescription}
+              </p>
+              <span class="text-secondary font-black text-[11px] uppercase tracking-widest group-hover:translate-x-1 inline-block transition-transform">
+                Ver detalhes do serviço &rarr;
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção SEO e Conteúdo Local -->
+  <section class="py-24 bg-gray-50 border-t border-b border-gray-200">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-black mb-8 tracking-tighter uppercase text-gray-900">
+          Vidraçaria em Canoas - RS: Soluções Sob Medida para Seu Projeto
+        </h2>
+        <div class="prose prose-lg text-gray-700 leading-relaxed space-y-6">
+          <p>
+            Procurando por uma <strong>vidraçaria em Canoas - RS</strong> com compromisso de entrega rápida, mão de obra experiente e os melhores materiais do mercado? A Vidro Essencial atende proprietários, arquitetos, designers de interiores e construtoras em toda a cidade de Canoas.
+          </p>
+          <p>
+            Trabalhamos com uma linha completa de soluções em vidro temperado, laminado, jateado e espelhos lapidados de alta definição. Seja para a instalação de um <strong>box de banheiro Blindex</strong>, o moderno <strong>envidraçamento de sacada</strong> com vedação estanque contra vento e chuva, ou divisórias corporativas que valorizam a luz natural, nossos projetos unem durabilidade e sofisticação estética.
+          </p>
+          <p>
+            Todas as nossas instalações seguem à risca as diretrizes técnicas das normas <strong>ABNT NBR 14207</strong> (Boxes de banheiro) e <strong>ABNT NBR 16259</strong> (Envidraçamento de sacadas), utilizando perfis estruturais de alumínio de alta resistência e ferragens antiferrugem em aço inox ou latão.
+          </p>
+        </div>
+
+        <div class="mt-12 p-8 bg-white border-l-8 border-secondary shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h4 class="text-xl font-black uppercase text-gray-900 mb-2">Solicite seu orçamento em Canoas</h4>
+            <p class="text-gray-600 text-sm">Fale diretamente com nossa equipe técnica pelo WhatsApp e receba uma estimativa ágil para sua obra.</p>
+          </div>
+          <a href={waLink} target="_blank" rel="noopener noreferrer" class="bg-secondary text-white font-black px-8 py-5 text-center uppercase tracking-widest text-xs hover:bg-accent transition-all whitespace-nowrap">
+            Chamar no WhatsApp: (51) 9927-8590
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Canoas -->
+  <section class="py-24 bg-white">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <span class="text-secondary font-black tracking-widest text-xs uppercase mb-3 block">Dúvidas Frequentes</span>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tighter uppercase text-gray-900">Perguntas Comuns sobre Serviços em Canoas</h2>
+        </div>
+
+        <div class="space-y-6">
+          <div class="p-8 bg-gray-50 border border-gray-100 rounded-lg">
+            <h3 class="text-lg font-black text-gray-900 mb-3">A Vidro Essencial atende em todos os locais de Canoas?</h3>
+            <p class="text-gray-600 leading-relaxed text-sm">Sim! Realizamos atendimento técnico e instalações em toda a cidade de Canoas - RS, com deslocamento rápido de nossa equipe para medições no local.</p>
+          </div>
+
+          <div class="p-8 bg-gray-50 border border-gray-100 rounded-lg">
+            <h3 class="text-lg font-black text-gray-900 mb-3">Qual o telefone de contato para Canoas?</h3>
+            <p class="text-gray-600 leading-relaxed text-sm">Nosso canal direto para orçamentos e agendamentos em Canoas é o WhatsApp e telefone <strong>(51) 9927-8590</strong>. Você pode enviar fotos e medidas aproximadas para agilizar o retorno.</p>
+          </div>
+
+          <div class="p-8 bg-gray-50 border border-gray-100 rounded-lg">
+            <h3 class="text-lg font-black text-gray-900 mb-3">Qual é o prazo médio de entrega para instalações em Canoas?</h3>
+            <p class="text-gray-600 leading-relaxed text-sm">O prazo médio gira em torno de 7 a 15 dias úteis a partir da aprovação e medição final, respeitando o tempo de têmpera, lapidação e controle de qualidade do vidro.</p>
+          </div>
+
+          <div class="p-8 bg-gray-50 border border-gray-100 rounded-lg">
+            <h3 class="text-lg font-black text-gray-900 mb-3">Os produtos instalados contam com garantia?</h3>
+            <p class="text-gray-600 leading-relaxed text-sm">Sim! Todos os serviços executados contam com garantia formal cobrindo defeitos de têmpera, funcionalidade dos componentes mecânicos e regulagem das ferragens.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="py-24 bg-secondary text-white">
+    <div class="container mx-auto px-6 md:px-12 text-center">
+      <h2 class="text-3xl md:text-5xl font-black mb-8 tracking-tighter uppercase text-primary">Precisa de Vidraçaria em Canoas - RS?</h2>
+      <p class="text-lg mb-12 text-gray-200 max-w-2xl mx-auto">Solicite agora mesmo seu orçamento sem compromisso. Atendimento rápido e equipe especializada à sua disposição.</p>
+      <a href={waLink} target="_blank" rel="noopener noreferrer" class="inline-block bg-primary text-secondary font-black px-12 py-6 text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-2xl">
+        Falar no WhatsApp: (51) 9927-8590
+      </a>
+    </div>
+  </section>
+</Layout>

@@ -16,6 +16,8 @@ interface Props {
 	whatsapp?: string;
 	phone?: string;
 	whatsappMessage?: string;
+	city?: string;
+	areaServed?: string;
 }
 
 const { 
@@ -24,7 +26,9 @@ const {
 	canonicalURL, 
 	whatsapp = SITE_CONFIG.contact.whatsapp, 
 	phone = SITE_CONFIG.contact.phone, 
-	whatsappMessage = SITE_CONFIG.contact.message 
+	whatsappMessage = SITE_CONFIG.contact.message,
+	city,
+	areaServed
 } = Astro.props;
 
 const waLink = `https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -34,7 +38,7 @@ const waLink = `https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappMess
 <html lang="pt-BR">
 	<head>
 		<SEO title={title} description={description} canonicalURL={canonicalURL} />
-		<SchemaLocalBusiness phone={phone} />
+		<SchemaLocalBusiness phone={phone} city={city} areaServed={areaServed} />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -148,13 +152,18 @@ const waLink = `https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappMess
 
 			<!-- Bairros Atendidos -->
 			<div class="container mx-auto px-6 md:px-12 mt-24 border-t border-white/10 pt-16">
-				<h3 class="font-black text-primary mb-10 uppercase tracking-[0.3em] text-[10px] text-center">Área de Atuação em Porto Alegre</h3>
+				<h3 class="font-black text-primary mb-10 uppercase tracking-[0.3em] text-[10px] text-center">Áreas de Atuação</h3>
 				<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 text-[10px] font-bold uppercase tracking-widest text-center">
 					{BAIRROS.map(bairro => (
 						<a href={`/bairros/${bairro.slug}`} class="text-gray-400 hover:text-primary transition-colors whitespace-nowrap">
 							{bairro.name}
 						</a>
 					))}
+				</div>
+				<div class="mt-8 text-center">
+					<a href="/canoas" class="inline-block bg-white/5 border border-primary/30 hover:border-primary text-primary px-6 py-3 text-[11px] font-black uppercase tracking-widest hover:scale-105 transition-all">
+						Vidraçaria em Canoas - RS (Atendimento Especializado) &rarr;
+					</a>
 				</div>
 			</div>
 			<div class="container mx-auto px-6 md:px-12 mt-24 pt-10 border-t border-white/10 text-[10px] uppercase tracking-[0.2em] text-gray-500 text-center">

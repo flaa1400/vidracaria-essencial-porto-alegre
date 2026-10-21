@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
     phone: '(51) 9169-3559',
     whatsapp: '555191693559',
     email: 'vidroessencialportoalegre@outlook.com',
-    message: 'Olá vim do site, Vidro Essencial Porto Alegre, e gostaria de fazer um Orçamento'
+    message: 'Olá vim do Site, Vidro Essencial Porto Alegre, e Gostaria de Fazer um Orçamento'
   },
   social: {
     instagram: 'https://www.instagram.com/vidro_essencial/',

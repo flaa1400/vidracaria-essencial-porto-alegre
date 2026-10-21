@@ -136,7 +136,7 @@ const style = layoutStyles[bIndex % layoutStyles.length];
                 {firstParagraph}
               </p>
               <div class="flex flex-col sm:flex-row gap-6">
-                <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento.`)}`} class={style.heroBtnClass}>
+                <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(SITE_CONFIG.contact.message)}`} class={style.heroBtnClass}>
                   Orçamento para {bairro.name}
                 </a>
               </div>
@@ -162,7 +162,7 @@ const style = layoutStyles[bIndex % layoutStyles.length];
               {firstParagraph}
             </p>
             <div class={`flex flex-col sm:flex-row gap-6 ${style.heroTextContainer.includes('text-center') ? 'justify-center' : ''}`}>
-              <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento.`)}`} class={style.heroBtnClass}>
+              <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(SITE_CONFIG.contact.message)}`} class={style.heroBtnClass}>
                 Orçamento para {bairro.name}
               </a>
             </div>
@@ -236,7 +236,7 @@ const style = layoutStyles[bIndex % layoutStyles.length];
     <div class="container mx-auto px-6 md:px-12 text-center">
       <h2 class="text-3xl md:text-5xl font-black mb-10 tracking-tighter uppercase text-primary">Precisa de um vidraceiro em {bairro.name}?</h2>
       <p class="text-lg mb-12 text-gray-300 max-w-2xl mx-auto">Solicite agora mesmo seu orçamento gratuito. Atendemos todo o bairro {bairro.name} com a maior agilidade de Porto Alegre.</p>
-      <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(`Olá, estou em ${bairro.name} e gostaria de um orçamento.`)}`} class={style.ctaBtnClass}>
+      <a href={`https://wa.me/${SITE_CONFIG.contact.whatsapp}?text=${encodeURIComponent(SITE_CONFIG.contact.message)}`} class={style.ctaBtnClass}>
         Falar no WhatsApp agora
       </a>
     </div>

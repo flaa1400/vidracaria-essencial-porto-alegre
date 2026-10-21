@@ -51,11 +51,6 @@ bairros.forEach(bairro => {
   });
 });
 
-// Canoas - Rio Grande do Sul
-addUrl('/canoas');
-servicos.forEach(servico => {
-  addUrl(`/canoas/${servico}`);
-});
 
 xml += `</urlset>`;
 

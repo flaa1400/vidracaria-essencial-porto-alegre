@@ -25,8 +25,8 @@ const { bairro, service } = Astro.props;
 const { Content } = await service.render();
 
 const isEsquadrias = service.slug === 'manutencao-esquadrias';
-const whatsapp = service.data.whatsapp || (isEsquadrias ? '555191693559' : SITE_CONFIG.contact.whatsapp);
-const phone = service.data.phone || (isEsquadrias ? '(51) 9169-3559' : SITE_CONFIG.contact.phone);
+const whatsapp = service.data.whatsapp || SITE_CONFIG.contact.whatsapp;
+const phone = service.data.phone || SITE_CONFIG.contact.phone;
 const esquadriasMsg = 'Olá, vim do Site Vidro Essencial Porto Alegre, e gostaria de fazer um Orçamento';
 
 const serviceName = service.data.title.replace(" em Porto Alegre", "");

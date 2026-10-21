@@ -13,14 +13,14 @@ const {
   phone = SITE_CONFIG.contact.phone,
   city = SITE_CONFIG.address.city,
   areaServed = 'Porto Alegre, RS',
-  latitude = (city === 'Canoas' ? -29.9179 : -30.0346),
-  longitude = (city === 'Canoas' ? -51.1795 : -51.2177)
+  latitude = -30.0346,
+  longitude = -51.2177
 } = Astro.props;
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": city === 'Canoas' ? `${SITE_CONFIG.name} - Vidraçaria em Canoas` : SITE_CONFIG.name,
+  "name": SITE_CONFIG.name,
   "image": `${SITE_CONFIG.domain}/og-image.jpg`,
   "@id": `${SITE_CONFIG.domain}/#localbusiness`,
   "url": SITE_CONFIG.domain,
@@ -60,4 +60,3 @@ const schema = {
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
-

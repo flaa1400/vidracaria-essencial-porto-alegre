@@ -14,8 +14,8 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 const isEsquadrias = entry.slug === 'manutencao-esquadrias';
-const whatsapp = entry.data.whatsapp || (isEsquadrias ? '555191693559' : SITE_CONFIG.contact.whatsapp);
-const phone = entry.data.phone || (isEsquadrias ? '(51) 9169-3559' : SITE_CONFIG.contact.phone);
+const whatsapp = entry.data.whatsapp || SITE_CONFIG.contact.whatsapp;
+const phone = entry.data.phone || SITE_CONFIG.contact.phone;
 const whatsappMessage = isEsquadrias ? 'Olá, vim do Site Vidro Essencial Porto Alegre, e gostaria de fazer um Orçamento' : SITE_CONFIG.contact.message;
 
 const description = `Especialista em ${entry.data.title.replace(" em Porto Alegre", "")} em Porto Alegre. Acabamento premium e segurança garantida para seu projeto local.`;
